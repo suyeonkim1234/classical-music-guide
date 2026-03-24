@@ -530,6 +530,7 @@ footer {
     <li><a href="#timeline">생몰 타임라인</a></li>
     <li><a href="#composers">작곡가별 상세</a></li>
     <li><a href="#quartets">현4 필수 레퍼토리</a></li>
+    <li><a href="#ourpieces" style="color:var(--viola);font-weight:600;">우리 연습곡</a></li>
   </ul>
 </nav>
 
@@ -587,6 +588,14 @@ footer {
     콰르텟 연주자라면 반드시 알아야 할 현악 4중주 명곡들
   </p>
   <div class="quartet-list" id="quartetList"></div>
+</div></section>
+
+<section id="ourpieces"><div class="container">
+  <h2 style="color:var(--viola);">우리 콰르텟 연습곡</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:28px;">
+    지금 우리가 연습하고 있는 곡들. 곡마다 누가, 언제, 어떤 마음으로 만들었는지, 비올라는 어떤 역할인지 정리했어요.
+  </p>
+  <div id="ourPiecesList"></div>
 </div></section>
 
 <footer>
@@ -1769,6 +1778,231 @@ function initActiveNav() {
 }
 
 // ===================================================================
+// OUR PIECES DATA
+// ===================================================================
+
+const OUR_PIECES = [
+  { group: "악보 있는 곡", items: [
+    {
+      title: "Laudate Dominum K.339",
+      composer: "모차르트",
+      arrangement: "비올라+피아노 / 바이올린+피아노",
+      hasScore: true,
+      age: "24세 (1780년)",
+      background: "잘츠부르크에서 궁정 음악가로 일하던 시절. 상사(대주교)와 갈등이 심해 이듬해 독립하게 되는 긴장 속에서도, 놀라울 만큼 평화롭고 순수한 곡을 써냄. 원래 소프라노 독창+합창+오케스트라를 위한 종교곡.",
+      mood: "순수한 감사와 평온함. 억지로 웅장하게 하지 말고, 맑은 날 아침 햇살처럼 자연스럽게 흘러가는 느낌으로. 길고 부드러운 활 사용이 핵심.",
+      violaRole: "비올라+피아노 편곡에서는 원래 소프라노가 부르던 선율을 비올라가 그대로 연주 — 비올라가 '노래하는 주인공'이 됨! 비올라 특유의 따뜻하고 약간 어두운 음색이 이 선율과 매우 잘 어울림.",
+      fame: "결혼식·장례식·세례식 단골 곡. 바르톨리, 네트렙코 등 세계적 성악가들이 즐겨 부름. 비올라+피아노 편곡은 독주 발표회에서 인기 높음.",
+      youtube: "Mozart Laudate Dominum K.339"
+    },
+    {
+      title: "인벤션 (2성 인벤션)",
+      composer: "바흐",
+      arrangement: "바이올린+첼로 / 바이올린+바이올린",
+      hasScore: true,
+      age: "38세경 (1723년)",
+      background: "아들 빌헬름의 음악 교육을 위해 작곡한 교육용 곡집. 겉보기엔 연습곡이지만, 실은 두 멜로디가 서로 대화하고 쫓고 화답하는 살아있는 드라마.",
+      mood: "두 연주자가 각자의 멜로디를 '말하는 사람'처럼 연주하면서도 서로의 소리를 항상 듣고 반응해야 함. 기계적으로 맞추기보다 대화하듯 유연하게, 그러나 구조감 있게.",
+      violaRole: "이 편곡에서 비올라 파트는 없지만, 비올라가 파트를 나눠 맡는 경우 — 두 성부 중 어느 하나도 '반주'가 아니므로 동등한 주인공으로 자신감 있게 선율을 이끌어야 함.",
+      fame: "피아노 배우는 사람이면 누구나 거치는 필수 교재. 전 세계 음악 교육의 표준. 현악기 편곡은 앙상블 연습 레퍼토리로 자주 선택됨.",
+      youtube: "Bach Two-Part Invention"
+    },
+    {
+      title: "Miserere",
+      composer: "알레그리 (모차르트 채보)",
+      arrangement: "현악 편곡",
+      hasScore: true,
+      age: "알레그리 56세경 (1638) / 모차르트 14세 (1770) 채보",
+      background: "바티칸 시스티나 성당에서만 연주 허가, 악보 유출 시 파문(교회 추방)이라는 엄격한 비밀 곡이었음. 14세 모차르트가 딱 한 번 듣고 숙소에서 전곡을 기억으로 받아씀! 교황청은 파문 대신 이 천재 소년에게 훈장을 수여.",
+      mood: "'주여, 저를 불쌍히 여기소서'라는 깊은 회개의 가사. 소박하면서도 깊은 내면의 감정, 겸손함과 간절함을 담아서. 신비롭고 경건한 공간감을 살려야 함.",
+      violaRole: "높은 소프라노 선율과 낮은 베이스 사이를 연결하는 '교각(다리)' 역할. 비올라 특유의 어두우면서도 풍부한 음색이 신비롭고 경건한 분위기를 만드는 데 핵심.",
+      fame: "세계에서 가장 신비롭고 유명한 합창곡 중 하나. 모차르트 채보 사건으로 전설이 됨. 영화·드라마 배경음악으로도 자주 사용.",
+      youtube: "Allegri Miserere mei Deus"
+    },
+    {
+      title: "판타지슈튀케 Op.73 안단테",
+      composer: "슈만",
+      arrangement: "비올라+피아노",
+      hasScore: true,
+      age: "39세 (1849년), 이틀 만에 작곡",
+      background: "드레스덴 혁명(5월 봉기)이 일어난 해에, 사회적 혼란 속에서도 왕성하게 작곡. 원래 클라리넷+피아노용이지만, 슈만이 직접 '바이올린·첼로로도 연주 가능'이라 명시 → 비올라 편곡도 매우 자연스러움.",
+      mood: "꿈꾸는 듯한 몽환성, 그리움, 섬세한 감정의 흔들림. 기술적으로 완벽하게 하려 하기보다 감정의 흐름을 따라가는 것이 슈만 음악의 본질. 시인의 내면 일기 같은 곡.",
+      violaRole: "비올라가 완전한 독주 주역! 클라리넷의 따뜻한 음색과 비올라의 음색이 매우 유사해서, 슈만의 낭만적 고독감을 가장 잘 표현하는 악기라는 평.",
+      fame: "클라리넷/비올라 독주 레퍼토리의 인기곡. 음대 입시·콩쿠르에도 자주 출제. 비올라 독주 발표회의 단골 곡.",
+      youtube: "Schumann Fantasiestücke Op.73 viola"
+    },
+    {
+      title: "현악 사중주 7번 내림마장조 K.160",
+      composer: "모차르트",
+      arrangement: "현악 4중주 (총보)",
+      hasScore: true,
+      age: "17세 (1773년)",
+      background: "이탈리아 여행을 마치고 잘츠부르크로 돌아온 직후 작곡. 이탈리아 음악의 영향을 강하게 받아, 가볍고 우아한 선율 중심의 스타일. 청소년 모차르트가 자신만의 목소리를 찾아가던 시기의 작품.",
+      mood: "청소년 모차르트의 명랑함, 생기, 이탈리아풍 우아함. 무겁게 해석하지 말고 가볍고 유연하게. 후기 4중주와 달리 순수하고 단순한 아름다움이 매력!",
+      violaRole: "주로 중간 화성을 채우고 리듬의 중심축을 잡는 역할. 바이올린이 주선율, 첼로가 베이스, 비올라는 그 중간에서 화음을 완성. 비올라가 빠지면 소리가 허전해지는 — 없어서는 안 될 역할.",
+      fame: "모차르트 초기 4중주라 단독 연주 기회는 적지만, 난이도가 적당해서 아마추어 앙상블에서 즐겨 연주. 앙상블 연습용으로 매우 좋은 곡.",
+      youtube: "Mozart String Quartet K.160"
+    },
+  ]},
+  { group: "연주곡 (악보 없음)", items: [
+    {
+      title: "판타지슈튀케 안단테 (추정: 클라리넷 소나타 Op.120)",
+      composer: "브람스",
+      arrangement: "비올라+피아노 [메인]",
+      hasScore: false,
+      age: "61세 (1894년)",
+      background: "이미 은퇴를 선언한 뒤였으나, 클라리넷 연주자 리하르트 뮐펠트의 연주에 감동받아 다시 작곡 의지를 불태움. 인생의 황혼기, 삶을 돌아보는 깊은 성찰과 체념, 그리고 평온함이 담긴 곡. 브람스가 직접 비올라 편곡을 허가한 곡.",
+      mood: "가을 저녁처럼 쓸쓸하면서도 따뜻한 감정. 화려한 기교보다 내면의 무게감과 깊이를 담아야 함. 서두르지 않고 음 하나하나에 충분히 머무는 것이 브람스 안단테의 핵심.",
+      violaRole: "원래 클라리넷 파트를 비올라가 담당하는 완전한 독주 주역! 클라리넷과 비올라의 따뜻한 음색이 매우 유사해서 브람스 본인이 비올라 연주를 허가한 것.",
+      fame: "브람스 최후의 실내악 걸작. '비올라의 성경'이라 불리는 Op.120. 비올리스트 킴 카시카시안 등의 연주로 유명.",
+      youtube: "Brahms Viola Sonata Op.120 Andante"
+    },
+    {
+      title: "부에노스아이레스의 사계 — 여름·가을·겨울",
+      composer: "피아졸라",
+      arrangement: "현악 4중주 편곡 [메인]",
+      hasScore: false,
+      age: "44~49세 (1965~1970년)",
+      background: "'Porteño' = '부에노스아이레스 항구 사람들의'라는 뜻. 아르헨티나 수도의 도시적 삶과 감성을 담음. 전통 탱고에 클래식과 재즈를 융합한 '누에보 탱고(새로운 탱고)' 장르를 창시한 곡.",
+      mood: "탱고의 DNA가 있는 음악! 여름 = 뜨겁고 격정적(폭풍 전 긴장감), 가을 = 쓸쓸하고 낭만적(그리움), 겨울 = 고독하고 차갑지만 내면에 깊은 열기. 학구적으로 연주하면 생명력이 사라짐 — 몸에서 자연스럽게 흘러나오는 느낌이 중요!",
+      violaRole: "두 가지 역할을 오감: ①리듬 파트 — 탱고 특유의 싱코페이션(예상 못한 곳에서 강조)을 첼로와 함께 지지. ②선율 파트 — 일부 구간에서 주선율이나 대위 선율 담당. 그루브(리듬감)의 핵심!",
+      fame: "비발디 사계와 함께 '두 개의 사계'로 불리며 세계적 인기. 기돈 크레머의 녹음이 특히 유명. 클래식과 대중 음악의 경계를 넘나드는 곡.",
+      youtube: "Piazzolla Four Seasons Buenos Aires string quartet"
+    },
+    {
+      title: "Ave Verum Corpus K.618",
+      composer: "모차르트",
+      arrangement: "현악 4중주 편곡",
+      hasScore: false,
+      age: "35세 (1791년, 사망 5개월 전)",
+      background: "불과 46마디의 짧은 곡이지만, 모차르트 전 생애의 지혜와 평화가 담긴 걸작. 당시 레퀴엠 작업 중이었고 건강이 심각하게 악화된 상태. 요양 중인 아내를 위해, 바덴의 성당 합창 지휘자에게 선물로 작곡.",
+      mood: "죽음을 앞둔 모차르트의 마지막 평화. 인생을 정리하는 고요함, 모든 것을 내려놓은 사람의 미소 같은 감정. 슬프게 연주하기보다 깊은 내면의 평온함을 담아서. 절대 서두르지 않고 음의 여운을 충분히 느끼며.",
+      violaRole: "중간 화성의 중심 역할. 소프라노(제1바이올린) 선율을 밑에서 받쳐주는, 없으면 소리가 텅 비는 핵심적 자리. 비올라가 음악의 '온도'를 만듦.",
+      fame: "모차르트 최후의 걸작 중 하나. 번스타인이 특히 사랑한 곡. 결혼식·장례식·졸업 연주회 등 어디서든 사랑받음. 합창·현악·피아노 등 편곡도 다양.",
+      youtube: "Mozart Ave Verum Corpus K.618"
+    },
+  ]},
+  { group: "별도 파일 / 소곡집", items: [
+    {
+      title: "When You Wish Upon a Star",
+      composer: "리 할린 (Leigh Harline)",
+      arrangement: "현악 4중주 편곡",
+      hasScore: false,
+      age: "1940년, 디즈니 영화 《피노키오》를 위해 작곡",
+      background: "2차 세계대전 직전의 혼란 속에서, 디즈니는 꿈과 희망의 메시지를 이 곡에 담아 전 세계에 위로를 전했음. 아카데미 주제가상+오리지널 스코어상 동시 수상.",
+      mood: "순수한 꿈, 어린 시절의 설렘, 별에 소원을 비는 마음. 클래식하게 딱딱하게 접근하지 말고, 별빛 반짝이는 밤하늘을 바라보는 부드럽고 몽환적인 분위기로. 노래하듯(cantabile) 연주.",
+      violaRole: "주로 중간 화성과 리듬 반주를 담당하며, 제1바이올린의 아름다운 주선율을 포근하게 감싸는 역할. 편곡에 따라 카운터멜로디(대위 선율)를 연주하기도.",
+      fame: "디즈니 역사상 가장 상징적인 음악. 오랫동안 디즈니 공식 테마송. 미국 의회도서관 문화유산 등재. 세대를 넘어 모든 청중이 즐기는 곡.",
+      youtube: "When You Wish Upon a Star string quartet"
+    },
+    {
+      title: "유모레스크 (Humoresque Op.101 No.7)",
+      composer: "드보르자크",
+      arrangement: "현악 4중주 편곡",
+      hasScore: false,
+      age: "53세 (1894년)",
+      background: "미국 생활을 마치고 오랫동안 그리워하던 고향 체코로 돌아온 직후 작곡. 보헤미안 숲 여름 별장에서, 고향에 돌아온 기쁨과 평화로운 여름의 정취가 가득한 곡.",
+      mood: "'유모레스크'는 '익살'이란 뜻이지만, 이 곡은 익살보다 따뜻한 향수(고향 그리움)와 가벼운 미소가 더 어울림. 춤추듯 흔들리는 리듬감을 살리되 너무 감상적으로 흐르지 않게.",
+      violaRole: "화성과 리듬 반주 담당. 춤추는 듯한 8분음표 리듬을 생동감 있게 만드는 데 비올라의 역할이 큼. 중간 부분에서 멜로디를 받아 연주하는 경우도.",
+      fame: "세계에서 가장 많이 연주되는 클래식 소품 중 하나. 야샤 하이페츠의 바이올린 녹음으로 특히 유명. 학예회·방송·광고에서 폭넓게 사용.",
+      youtube: "Dvorak Humoresque violin"
+    },
+    {
+      title: "성체찬가 (Panis Angelicus)",
+      composer: "세자르 프랑크",
+      arrangement: "현악 4중주 편곡",
+      hasScore: false,
+      age: "50세 (1872년)",
+      background: "오르간 미사곡의 일부로 작곡했으나, 독립된 성악 소품으로 더 유명해짐. 가사는 13세기 성 토마스 아퀴나스가 쓴 라틴어 찬가 — '천사의 빵이 사람들에게 전해진다'는 내용.",
+      mood: "경건하고 순수한 헌신. 신성한 빛이 내려오는 느낌. 화려한 감정보다 고요하고 투명한 아름다움. 자신을 비우고 음악이 흘러가도록 두는 것이 이상적.",
+      violaRole: "중간 화성 성부로 앙상블 전체의 부드러운 음향 토대를 만듦. 선율이 아름답게 노래하도록 반주가 조용하고 균일해야 하므로, 음량 조절과 음질 균일성이 특히 중요.",
+      fame: "세계에서 가장 사랑받는 성악 소품 중 하나. 파바로티·도밍고 등의 단골 곡. 결혼식·장례식 등 교회 행사 필수곡.",
+      youtube: "Panis Angelicus Franck"
+    },
+    {
+      title: "미뉴에트 1, 2, 3",
+      composer: "바흐/보케리니/하이든 등",
+      arrangement: "현악 4중주 소곡집",
+      hasScore: false,
+      age: "17~18세기 유럽 궁정 춤곡",
+      background: "미뉴에트 = 프랑스 기원의 3박자 춤곡. 궁정 무도회에서 귀족들이 추던 우아하고 단정한 춤의 음악. 이후 교향곡·현4의 3악장에 포함되는 표준 형식이 됨. 가장 유명한 것은 바흐 미뉴에트 G장조, 보케리니 미뉴에트.",
+      mood: "우아하고 절도 있는 춤의 느낌. 3박자의 흔들림을 살리되 너무 가볍거나 무겁지 않게. 18세기 베르사유 궁전 무도회에서 귀족들이 우아하게 춤추는 장면을 상상하면 됨!",
+      violaRole: "중간 화성을 채우며 리듬의 균일성을 유지. 미뉴에트는 리듬이 명확해야 하므로 비올라의 정확한 박자 감각이 앙상블 전체의 안정성에 크게 기여.",
+      fame: "바흐 미뉴에트, 보케리니 미뉴에트는 세계적으로 유명. 어린이 음악 교육·클래식 입문·광고·영화 배경음악으로 폭넓게 사용.",
+      youtube: "Boccherini Minuet string quartet"
+    },
+    {
+      title: "카바티나 — 현악4중주 13번 Op.130 5악장",
+      composer: "베토벤",
+      arrangement: "현악 4중주",
+      hasScore: false,
+      age: "54~55세 (1825년), 완전히 청각을 잃은 상태에서 작곡",
+      background: "베토벤 후기 4중주 시리즈 중 가장 서정적인 악장. 베토벤 본인이 '이 악장을 생각하면 늘 눈물이 난다. 내 인생에서 가장 아끼는 음악'이라고 말한 것으로 전해짐. 귀가 완전히 안 들리는 상태에서, 오직 머릿속 상상으로만 완성한 곡.",
+      mood: "말로 표현할 수 없는 깊은 감동과 슬픔. 중간부에 베토벤이 직접 'Beklemmt(숨이 막히는)'이라고 적어놓은 부분이 있음 — 극도로 고통스러운 압박감. 기교보다 베토벤이 청각을 잃고 내면에서 들은 음악을 따라가는 마음으로. 절대적 집중과 내면의 고요함이 필요.",
+      violaRole: "단순한 화성 역할을 넘어, 가장 중요한 내면의 목소리를 표현. 특히 'Beklemmt' 부분에서 첼로와 함께 무거운 발걸음처럼 움직이며 감정의 핵심을 만듦. 베토벤은 4개 성부를 모두 동등하게 취급 — 비올라의 음 하나하나가 다 의미 있음.",
+      fame: "인류 역사상 가장 심오한 음악 중 하나. 1977년 보이저 우주탐사선 '골든 레코드'에 수록 — 우주에 존재하는 단 하나의 베토벤 4중주! 세계 최고의 4중주단들이 필수 레퍼토리로 삼는 곡.",
+      youtube: "Beethoven Cavatina Op.130 string quartet"
+    },
+  ]},
+];
+
+function renderOurPieces() {
+  const container = document.getElementById('ourPiecesList');
+  container.innerHTML = OUR_PIECES.map(group => `
+    <h3 style="color:var(--gold);margin:40px 0 20px;font-size:1.1rem;display:flex;align-items:center;gap:8px;">
+      <span style="display:inline-block;width:10px;height:10px;border-radius:50%;background:var(--viola);"></span>
+      ${group.group}
+    </h3>
+    ${group.items.map(p => `
+      <div class="composer-card fade-in" style="border-left:3px solid var(--viola);">
+        <div class="composer-header" onclick="this.nextElementSibling.classList.toggle('open')" style="cursor:pointer;">
+          <div class="composer-info">
+            <h3 style="padding-left:0;border:none;font-size:1.1rem;">
+              ${p.title}
+              <span class="orig">${p.composer}</span>
+            </h3>
+            <div class="composer-meta">
+              <span>${p.arrangement}</span>
+              <span>${p.hasScore ? '악보 있음' : '악보 없음'}</span>
+            </div>
+          </div>
+          <div style="color:var(--text3);font-size:0.85rem;">클릭하여 열기 ▾</div>
+        </div>
+        <div class="composer-body">
+
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
+            <div style="background:rgba(212,168,67,0.06);border-left:3px solid var(--gold-dim);border-radius:0 10px 10px 0;padding:14px 18px;">
+              <strong style="color:var(--gold);">누가, 언제, 어떤 상황에서?</strong><br>
+              <span style="font-size:0.85rem;color:var(--text2);display:block;margin-top:4px;">작곡 나이: ${p.age}</span>
+              <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.background}</p>
+            </div>
+            <div style="background:rgba(139,92,246,0.06);border-left:3px solid var(--viola);border-radius:0 10px 10px 0;padding:14px 18px;">
+              <strong style="color:var(--viola);">비올라의 역할</strong>
+              <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.violaRole}</p>
+            </div>
+          </div>
+
+          <div style="background:rgba(196,56,78,0.06);border-left:3px solid var(--era-romantic);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px;">
+            <strong style="color:var(--era-romantic);">어떤 마음으로 연주하면 좋을까?</strong>
+            <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.mood}</p>
+          </div>
+
+          <div style="background:rgba(46,134,222,0.06);border-left:3px solid var(--era-modern);border-radius:0 10px 10px 0;padding:14px 18px;margin-bottom:16px;">
+            <strong style="color:var(--era-modern);">이 곡은 세상에서 어떻게 알려져 있나?</strong>
+            <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.fame}</p>
+          </div>
+
+          <div class="work-item" onclick="playMusic('${p.youtube}')" style="display:inline-flex;width:auto;">
+            <div class="play-btn">&#9654;</div>
+            <span class="work-title">YouTube에서 들어보기</span>
+          </div>
+        </div>
+      </div>
+    `).join('')}
+  `).join('');
+}
+
+// ===================================================================
 // INIT
 // ===================================================================
 document.addEventListener('DOMContentLoaded', () => {
@@ -1781,6 +2015,7 @@ document.addEventListener('DOMContentLoaded', () => {
   renderFilters();
   renderComposerSections();
   renderQuartetEssentials();
+  renderOurPieces();
   initScrollAnimations();
   initActiveNav();
 });
