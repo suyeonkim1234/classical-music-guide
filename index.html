@@ -9,22 +9,22 @@
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --bg: #1a1a2e;
-  --bg2: #1f1f33;
-  --bg-card: #252540;
-  --bg-card-hover: #2e2e4a;
-  --text: #f2ede4;
-  --text2: #c8bfb0;
-  --text3: #9a9185;
-  --gold: #e0b450;
-  --gold-dim: #b89940;
-  --gold-bright: #f5d070;
-  --era-baroque: #d4a030;
-  --era-classical: #e8c040;
-  --era-romantic: #e05068;
-  --era-late: #a06cc0;
-  --era-modern: #50a0f0;
-  --viola: #b8a0ff;
+  --bg: #f5f0e6;
+  --bg2: #ede7db;
+  --bg-card: #ffffff;
+  --bg-card-hover: #f0ebe0;
+  --text: #2c2416;
+  --text2: #5a4d3e;
+  --text3: #8a7d6e;
+  --gold: #4a7a56;
+  --gold-dim: #3a6646;
+  --gold-bright: #5a9a66;
+  --era-baroque: #8a6d20;
+  --era-classical: #4a7a56;
+  --era-romantic: #b84050;
+  --era-late: #7a5090;
+  --era-modern: #2e7090;
+  --viola: #4a7a56;
 }
 
 html { scroll-behavior: smooth; }
@@ -39,9 +39,9 @@ body {
 /* ===== NAV ===== */
 nav {
   position: sticky; top: 0; z-index: 100;
-  background: rgba(26,26,46,0.95);
+  background: rgba(245,240,230,0.95);
   backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(224,180,80,0.2);
+  border-bottom: 1px solid rgba(74,122,86,0.2);
   padding: 12px 0;
 }
 nav ul {
@@ -56,7 +56,7 @@ nav a {
 }
 nav a:hover, nav a.active {
   color: var(--gold); border-color: var(--gold-dim);
-  background: rgba(212,168,67,0.08);
+  background: rgba(74,122,86,0.08);
 }
 
 /* ===== COMMON ===== */
@@ -73,13 +73,13 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 /* ===== HERO ===== */
 .hero {
   text-align: center; padding: 120px 24px 80px;
-  background: linear-gradient(180deg, rgba(212,168,67,0.06) 0%, transparent 60%);
+  background: linear-gradient(180deg, rgba(74,122,86,0.06) 0%, transparent 60%);
 }
 .hero h1 { margin-bottom: 16px; line-height: 1.3; }
 .hero p { color: var(--text2); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
 .hero .badge {
   display: inline-block; margin-top: 20px; padding: 6px 18px;
-  background: rgba(139,92,246,0.12); border: 1px solid var(--viola);
+  background: rgba(74,122,86,0.12); border: 1px solid var(--viola);
   border-radius: 20px; color: var(--viola); font-size: 0.85rem;
 }
 
@@ -91,12 +91,12 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .genre-card {
   background: var(--bg-card); border-radius: 16px;
-  padding: 28px; border: 1px solid rgba(255,255,255,0.04);
+  padding: 28px; border: 1px solid rgba(0,0,0,0.06);
   transition: all 0.3s;
 }
 .genre-card:hover {
   background: var(--bg-card-hover);
-  border-color: rgba(212,168,67,0.15);
+  border-color: rgba(74,122,86,0.15);
   transform: translateY(-2px);
 }
 .genre-card .hanja {
@@ -114,14 +114,14 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .genre-card p { font-size: 0.92rem; color: var(--text2); margin-top: 8px; }
 .genre-card .example {
   margin-top: 12px; font-size: 0.82rem; color: var(--text3);
-  padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 8px;
+  padding: 8px 12px; background: rgba(0,0,0,0.05); border-radius: 8px;
 }
 
 /* ===== ENSEMBLE INFO ===== */
 .ensemble-box {
   margin-top: 40px; padding: 28px;
-  background: rgba(139,92,246,0.06);
-  border: 1px solid rgba(139,92,246,0.2);
+  background: rgba(74,122,86,0.06);
+  border: 1px solid rgba(74,122,86,0.2);
   border-radius: 16px;
 }
 .ensemble-box h3 { color: var(--viola); margin-bottom: 16px; }
@@ -130,7 +130,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   gap: 12px;
 }
 .ensemble-item {
-  padding: 12px 16px; background: rgba(0,0,0,0.2); border-radius: 10px;
+  padding: 12px 16px; background: rgba(0,0,0,0.05); border-radius: 10px;
   font-size: 0.9rem;
 }
 .ensemble-item strong { color: var(--text); }
@@ -147,7 +147,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .era-block {
   display: flex; flex-direction: column;
   justify-content: center; align-items: center;
-  padding: 8px 16px; color: white; cursor: pointer;
+  padding: 8px 16px; color: #fff; cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
   transition: filter 0.3s; position: relative;
   font-size: 0.9rem; font-weight: 600;
 }
@@ -171,7 +171,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   padding: 8px 12px; border-radius: 8px;
   transition: background 0.2s; cursor: pointer;
 }
-.death-row:hover { background: rgba(255,255,255,0.03); }
+.death-row:hover { background: rgba(0,0,0,0.04); }
 .death-name { width: 100px; flex-shrink: 0; text-align: right; color: var(--text2); font-size: 0.82rem; }
 .death-bar-wrap { flex: 1; position: relative; height: 26px; }
 .death-bar {
@@ -200,7 +200,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .timeline-ruler {
   display: flex; justify-content: space-between;
   min-width: 900px; padding: 0 0 8px;
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.1);
   font-size: 0.72rem; color: var(--text3);
 }
 .timeline-rows { min-width: 900px; margin-top: 4px; }
@@ -209,7 +209,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   position: relative; cursor: pointer;
   transition: background 0.2s;
 }
-.timeline-row:hover { background: rgba(255,255,255,0.02); }
+.timeline-row:hover { background: rgba(0,0,0,0.03); }
 .timeline-label {
   width: 100px; flex-shrink: 0; text-align: right;
   padding-right: 12px; font-size: 0.78rem; color: var(--text2);
@@ -245,10 +245,10 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .composer-card {
   background: var(--bg-card); border-radius: 16px;
   margin-bottom: 24px; overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.04);
+  border: 1px solid rgba(0,0,0,0.06);
   transition: border-color 0.3s;
 }
-.composer-card:hover { border-color: rgba(212,168,67,0.12); }
+.composer-card:hover { border-color: rgba(74,122,86,0.12); }
 .composer-header {
   display: flex; justify-content: space-between; align-items: center;
   padding: 24px 28px; cursor: pointer; flex-wrap: wrap; gap: 12px;
@@ -274,7 +274,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 
 .composer-body {
   display: none; padding: 0 28px 28px;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(0,0,0,0.06);
 }
 .composer-body.open { display: block; padding-top: 24px; }
 
@@ -283,8 +283,8 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .stat-chip {
   padding: 6px 14px; border-radius: 20px;
-  background: rgba(255,255,255,0.04); font-size: 0.82rem;
-  color: var(--text2); border: 1px solid rgba(255,255,255,0.06);
+  background: rgba(0,0,0,0.06); font-size: 0.82rem;
+  color: var(--text2); border: 1px solid rgba(0,0,0,0.08);
 }
 .stat-chip strong { color: var(--gold); margin-right: 4px; }
 
@@ -293,16 +293,16 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .work-item {
   display: flex; align-items: center; gap: 12px;
   padding: 10px 14px; margin-bottom: 6px;
-  background: rgba(0,0,0,0.2); border-radius: 10px;
+  background: rgba(0,0,0,0.05); border-radius: 10px;
   cursor: pointer; transition: all 0.2s;
 }
 .work-item:hover {
-  background: rgba(212,168,67,0.08);
+  background: rgba(74,122,86,0.08);
   transform: translateX(4px);
 }
 .play-btn {
   width: 32px; height: 32px; border-radius: 50%;
-  background: rgba(212,168,67,0.15); border: 1px solid var(--gold-dim);
+  background: rgba(74,122,86,0.15); border: 1px solid var(--gold-dim);
   display: flex; align-items: center; justify-content: center;
   flex-shrink: 0; transition: all 0.2s; color: var(--gold);
   font-size: 0.7rem;
@@ -311,17 +311,17 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .work-title { font-size: 0.88rem; color: var(--text); }
 .work-genre-tag {
   font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
-  background: rgba(255,255,255,0.06); color: var(--text3);
+  background: rgba(0,0,0,0.08); color: var(--text3);
   flex-shrink: 0;
 }
 .work-genre-tag.quartet {
-  background: rgba(139,92,246,0.12); color: var(--viola);
-  border: 1px solid rgba(139,92,246,0.3);
+  background: rgba(74,122,86,0.12); color: var(--viola);
+  border: 1px solid rgba(74,122,86,0.3);
 }
 
 .viola-note {
   margin-top: 20px; padding: 14px 18px;
-  background: rgba(139,92,246,0.06);
+  background: rgba(74,122,86,0.06);
   border-left: 3px solid var(--viola);
   border-radius: 0 10px 10px 0;
   font-size: 0.88rem; color: var(--text2);
@@ -344,7 +344,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .quartet-item {
   padding: 16px 20px; background: var(--bg-card);
-  border-radius: 12px; border: 1px solid rgba(139,92,246,0.1);
+  border-radius: 12px; border: 1px solid rgba(74,122,86,0.1);
   cursor: pointer; transition: all 0.2s;
 }
 .quartet-item:hover {
@@ -361,16 +361,16 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .filter-btn {
   padding: 7px 18px; border-radius: 20px;
-  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(0,0,0,0.06); border: 1px solid rgba(0,0,0,0.1);
   color: var(--text2); font-size: 0.82rem; cursor: pointer;
   font-family: 'Noto Sans KR', sans-serif; transition: all 0.2s;
 }
 .filter-btn:hover, .filter-btn.active {
-  background: rgba(212,168,67,0.1); border-color: var(--gold-dim);
+  background: rgba(74,122,86,0.1); border-color: var(--gold-dim);
   color: var(--gold);
 }
 .filter-btn.viola-filter.active {
-  background: rgba(139,92,246,0.12); border-color: var(--viola);
+  background: rgba(74,122,86,0.12); border-color: var(--viola);
   color: var(--viola);
 }
 
@@ -383,16 +383,16 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   border-left: 3px solid transparent;
 }
 .tree-node.root {
-  background: rgba(212,168,67,0.1); border-left-color: var(--gold);
+  background: rgba(74,122,86,0.1); border-left-color: var(--gold);
   font-weight: 600; color: var(--gold); font-size: 1rem;
   margin-left: 0;
 }
 .tree-node.branch {
-  background: rgba(255,255,255,0.03); border-left-color: var(--text3);
+  background: rgba(0,0,0,0.04); border-left-color: var(--text3);
   color: var(--text);
 }
 .tree-node.highlight {
-  background: rgba(139,92,246,0.1); border-left-color: var(--viola);
+  background: rgba(74,122,86,0.1); border-left-color: var(--viola);
   color: var(--viola); font-weight: 600;
 }
 .tree-node .tree-desc {
@@ -400,11 +400,11 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .tree-node .tree-members {
   font-size: 0.78rem; color: var(--text2); font-weight: 400;
-  background: rgba(0,0,0,0.15); padding: 4px 10px; border-radius: 6px;
+  background: rgba(0,0,0,0.04); padding: 4px 10px; border-radius: 6px;
   display: inline-block; margin-top: 4px;
 }
 .tree-connector {
-  margin-left: 10px; border-left: 2px dashed rgba(255,255,255,0.08);
+  margin-left: 10px; border-left: 2px dashed rgba(0,0,0,0.1);
   padding-left: 10px;
 }
 
@@ -416,7 +416,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .basics-block {
   background: var(--bg-card); border-radius: 16px;
-  padding: 28px; border: 1px solid rgba(255,255,255,0.04);
+  padding: 28px; border: 1px solid rgba(0,0,0,0.06);
 }
 .basics-block h3 {
   font-size: 1.1rem; color: var(--gold); margin-bottom: 16px;
@@ -434,11 +434,11 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .basics-table th {
   text-align: left; padding: 10px 14px;
-  background: rgba(0,0,0,0.25); color: var(--gold-dim);
+  background: rgba(0,0,0,0.06); color: var(--gold-dim);
   font-weight: 600; font-size: 0.82rem;
 }
 .basics-table td {
-  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
+  padding: 10px 14px; border-bottom: 1px solid rgba(0,0,0,0.04);
   color: var(--text2);
 }
 .basics-table tr:hover td { background: rgba(255,255,255,0.015); }
@@ -449,7 +449,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .basics-analogy {
   margin-top: 14px; padding: 14px 18px;
-  background: rgba(212,168,67,0.06);
+  background: rgba(74,122,86,0.06);
   border-left: 3px solid var(--gold-dim);
   border-radius: 0 10px 10px 0;
   font-size: 0.88rem; color: var(--text2);
@@ -468,7 +468,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   border: 1px solid #ccc;
 }
 .key-black {
-  width: 28px; height: 52px; background: #222; color: #aaa;
+  width: 28px; height: 52px; background: #333; color: #ccc;
   margin: 0 -8px; z-index: 1; border: 1px solid #000;
 }
 .key-white.highlight { background: var(--gold); color: #111; }
@@ -482,7 +482,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   position: relative;
 }
 .mvmt-box .mvmt-num { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
-.mvmt-box .mvmt-tempo { font-size: 1rem; font-weight: 600; color: white; margin: 4px 0; }
+.mvmt-box .mvmt-tempo { font-size: 1rem; font-weight: 600; color: #fff; margin: 4px 0; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
 .mvmt-box .mvmt-char { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
 .mvmt-arrow {
   font-size: 1.2rem; color: var(--text3); padding: 0 4px; flex-shrink: 0;
@@ -495,7 +495,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 /* ===== FOOTER ===== */
 footer {
   text-align: center; padding: 40px 24px;
-  border-top: 1px solid rgba(255,255,255,0.04);
+  border-top: 1px solid rgba(0,0,0,0.06);
   color: var(--text3); font-size: 0.8rem;
 }
 
@@ -545,7 +545,7 @@ footer {
   <p style="color:var(--text2);font-size:0.9rem;margin-bottom:12px;">
     클래식 음악을 이해하기 위해 꼭 알아야 할 기본 용어들. 한자 뜻풀이로 쉽게!
   </p>
-  <div style="background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:14px;padding:20px;margin-bottom:28px;font-size:0.88rem;color:var(--text2);">
+  <div style="background:rgba(74,122,86,0.08);border:1px solid rgba(74,122,86,0.2);border-radius:14px;padding:20px;margin-bottom:28px;font-size:0.88rem;color:var(--text2);">
     <strong style="color:var(--gold);font-size:0.95rem;">이 순서로 읽으면 자연스럽게 이해돼요!</strong><br><br>
     <strong>① 클래식 음악이 뭔지</strong> — 먼저 큰 그림을 잡고<br>
     <strong>② 조성(장조·단조)</strong> — 곡의 분위기를 결정하는 핵심 개념 (밝다/어둡다) → 조성 이름을 읽으려면 음이름(CDEFGAB)을 알아야 해서, 바로 이어서 음이름 표와 샤프(#)·플랫(b) 설명이 나옴<br>
@@ -561,7 +561,7 @@ footer {
   <h2>음악 형식 가이드</h2>
   <div class="genre-grid" id="genreGrid"></div>
   <div class="ensemble-box" id="ensembleBox"></div>
-  <div class="ensemble-box" id="chamberTree" style="margin-top:24px;background:rgba(212,168,67,0.04);border-color:rgba(212,168,67,0.2);"></div>
+  <div class="ensemble-box" id="chamberTree" style="margin-top:24px;background:rgba(74,122,86,0.04);border-color:rgba(74,122,86,0.2);"></div>
 </div></section>
 
 <section id="eras"><div class="container">
@@ -766,12 +766,12 @@ const BASICS = {
           보통 <strong>4개의 악장</strong>으로 구성.<br>
           작곡가가 하고 싶은 말을 가장 크고 웅장하게 표현하는 장르.
         </p>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.04);border-radius:6px;">
           비유: 영화로 치면 <strong>블록버스터 대작</strong>. 최대 인원이 총동원.
         </div>
       </div>
 
-      <div style="background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:14px;padding:20px;">
+      <div style="background:rgba(74,122,86,0.08);border:1px solid rgba(74,122,86,0.2);border-radius:14px;padding:20px;">
         <div style="font-size:1.6rem;color:var(--gold);font-family:'Noto Sans KR',sans-serif;">奏鳴曲</div>
         <div style="font-size:0.82rem;color:var(--gold-dim);margin-bottom:8px;">奏(아뢸 주) + 鳴(울 명) + 曲(곡 곡)</div>
         <h4 style="color:var(--text);margin-bottom:6px;">소나타 (Sonata)</h4>
@@ -780,7 +780,7 @@ const BASICS = {
           보통 <strong>3~4개의 악장</strong>으로 구성.<br>
           악기 하나가 할 수 있는 모든 것을 보여주는 장르.
         </p>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.04);border-radius:6px;">
           비유: 영화로 치면 <strong>1인극 혹은 2인극</strong>. 배우 한 명의 연기력이 핵심.
         </div>
       </div>
@@ -794,23 +794,23 @@ const BASICS = {
           보통 <strong>3개의 악장</strong>으로 구성.<br>
           독주자가 주인공, 오케스트라가 대화 상대.
         </p>
-        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.04);border-radius:6px;">
           비유: 영화로 치면 <strong>주연 1명 + 조연 군단</strong>. 주인공의 기교가 빛남.
         </div>
       </div>
     </div>
 
-    <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:20px;margin-bottom:28px;">
+    <div style="background:rgba(74,122,86,0.06);border:1px solid rgba(74,122,86,0.15);border-radius:14px;padding:20px;margin-bottom:28px;">
       <h4 style="color:var(--viola);margin-bottom:10px;">잠깐! "소나타"는 두 가지 뜻으로 쓰여요</h4>
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
-        <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:14px;">
+        <div style="background:rgba(0,0,0,0.04);border-radius:10px;padding:14px;">
           <strong style="color:var(--text);">1. 곡의 종류 (장르)</strong>
           <p style="font-size:0.85rem;color:var(--text2);margin-top:4px;">
             "베토벤 피아노 소나타 '월광'"<br>
             → 피아노를 위한 곡이라는 뜻
           </p>
         </div>
-        <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:14px;">
+        <div style="background:rgba(0,0,0,0.04);border-radius:10px;padding:14px;">
           <strong style="color:var(--text);">2. 곡 안의 짜임새 (형식)</strong>
           <p style="font-size:0.85rem;color:var(--text2);margin-top:4px;">
             "1악장은 소나타 형식이다"<br>
@@ -1406,11 +1406,11 @@ function renderChamberTree() {
           <div class="tree-node branch">오라토리오, 레퀴엠 등</div>
         </div>
 
-        <div class="tree-node root" style="background:rgba(139,92,246,0.12);border-left-color:var(--viola);color:var(--viola);">
+        <div class="tree-node root" style="background:rgba(74,122,86,0.12);border-left-color:var(--viola);color:var(--viola);">
           실내악 (Chamber Music) — 소규모 (2~9명)
           <div class="tree-desc" style="color:var(--viola);">지휘자 없이 연주자들이 서로 들으며 대화하듯 연주. 가장 친밀한 음악!</div>
         </div>
-        <div class="tree-connector" style="margin-left:30px;border-left-color:rgba(139,92,246,0.15);">
+        <div class="tree-connector" style="margin-left:30px;border-left-color:rgba(74,122,86,0.15);">
 
           <div class="tree-node branch">2명 (Duo)
             <div class="tree-members">소나타: 독주악기 + 피아노 (예: 비올라 소나타)</div>
@@ -1422,7 +1422,7 @@ function renderChamberTree() {
 
           <div class="tree-node highlight">
             4명 (Quartet) — 현악 4중주 ← 여기가 바로 당신!
-            <div class="tree-members" style="background:rgba(139,92,246,0.15);">
+            <div class="tree-members" style="background:rgba(74,122,86,0.15);">
               바이올린 1st + 바이올린 2nd + <strong>비올라</strong> + 첼로<br>
               "실내악의 꽃". 네 악기가 평등하게 대화. 가장 많이 작곡된 실내악 형태
             </div>
@@ -1660,7 +1660,7 @@ function renderComposerCard(c, eraColor) {
       </div>
       <div class="composer-body" id="body-${c.id}">
         ${c.style ? `<div class="basics-analogy" style="margin-bottom:16px;border-left-color:${eraColor};"><strong>작곡 스타일:</strong> ${c.style}</div>` : ''}
-        ${c.personality ? `<div class="basics-analogy" style="margin-bottom:16px;border-left-color:var(--viola);background:rgba(139,92,246,0.05);"><strong>성격 & 요즘 살았다면?</strong> ${c.personality}</div>` : ''}
+        ${c.personality ? `<div class="basics-analogy" style="margin-bottom:16px;border-left-color:var(--viola);background:rgba(74,122,86,0.05);"><strong>성격 & 요즘 살았다면?</strong> ${c.personality}</div>` : ''}
         <div class="work-stats">${statsHtml}</div>
         <div class="famous-works">
           <h4>주요 작품 (클릭하면 YouTube에서 들을 수 있어요)</h4>
@@ -1839,22 +1839,22 @@ const OUR_PIECES = [
   ]},
   { group: "꿈과 그리움 — 따뜻하고 낭만적인 곡들", emoji: "&#x1F319;", color: "var(--era-romantic)", items: [
     {
-      title: "판타지슈튀케 Op.73 안단테",
+      title: "환상 소품집 Op.73 안단테 (Fantasiestücke)",
       composer: "슈만",
       arrangement: "비올라+피아노",
       age: "39세 (1849년), 이틀 만에 작곡",
-      background: "드레스덴 혁명(5월 봉기)이 일어난 해에, 사회적 혼란 속에서도 왕성하게 작곡. 원래 클라리넷+피아노용이지만, 슈만이 직접 '바이올린·첼로로도 연주 가능'이라 명시 → 비올라 편곡도 매우 자연스러움.",
+      background: "'Fantasiestücke(판타지슈튀케)'는 독일어로 '환상적인 소품들'이란 뜻이에요. 드레스덴 혁명이 일어난 해에 이틀 만에 뚝딱 완성. 원래 클라리넷+피아노용이지만, 슈만이 직접 '바이올린·첼로로도 연주 가능'이라 명시 → 비올라 편곡도 매우 자연스러움.",
       mood: "꿈꾸는 듯한 몽환성, 그리움, 섬세한 감정의 흔들림. 기술적으로 완벽하게 하려 하기보다 감정의 흐름을 따라가는 것이 슈만 음악의 본질. 시인의 내면 일기 같은 곡.",
       violaRole: "비올라가 완전한 독주 주역! 클라리넷의 따뜻한 음색과 비올라의 음색이 매우 유사해서, 슈만의 낭만적 고독감을 가장 잘 표현하는 악기라는 평.",
       fame: "클라리넷/비올라 독주 레퍼토리의 인기곡. 음대 입시·콩쿠르에도 자주 출제. 비올라 독주 발표회의 단골 곡.",
       youtube: "Schumann Fantasiestücke Op.73 viola"
     },
     {
-      title: "판타지슈튀케 안단테 (추정: 클라리넷 소나타 Op.120)",
+      title: "브람스 안단테 (곡명 확인 중 — 총보 확인 필요)",
       composer: "브람스",
       arrangement: "비올라+피아노 [메인]",
-      age: "61세 (1894년)",
-      background: "이미 은퇴를 선언한 뒤였으나, 클라리넷 연주자 리하르트 뮐펠트의 연주에 감동받아 다시 작곡 의지를 불태움. 인생의 황혼기, 삶을 돌아보는 깊은 성찰과 체념, 그리고 평온함이 담긴 곡. 브람스가 직접 비올라 편곡을 허가한 곡.",
+      age: "추정 61세 (1894년)",
+      background: "단원이 알려준 곡명 '브람스 피사 안단테'인데, 브람스에는 '환상 소품집(Fantasiestücke)'이라는 제목의 곡이 없어요. 가장 유력한 후보는 <strong>클라리넷(비올라) 소나타 Op.120의 안단테 악장</strong>. 은퇴를 선언한 뒤였으나, 클라리넷 연주자 뮐펠트의 연주에 감동받아 다시 작곡. 브람스가 직접 비올라 편곡을 허가한 곡.",
       mood: "가을 저녁처럼 쓸쓸하면서도 따뜻한 감정. 화려한 기교보다 내면의 무게감과 깊이를 담아야 함. 서두르지 않고 음 하나하나에 충분히 머무는 것이 브람스 안단테의 핵심.",
       violaRole: "원래 클라리넷 파트를 비올라가 담당하는 완전한 독주 주역! 클라리넷과 비올라의 따뜻한 음색이 매우 유사해서 브람스 본인이 비올라 연주를 허가한 것.",
       fame: "브람스 최후의 실내악 걸작. '비올라의 성경'이라 불리는 Op.120. 비올리스트 킴 카시카시안 등의 연주로 유명.",
@@ -1980,12 +1980,12 @@ function renderOurPieces() {
         <div class="composer-body">
 
           <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:16px;">
-            <div style="background:rgba(212,168,67,0.06);border-left:3px solid var(--gold-dim);border-radius:0 10px 10px 0;padding:14px 18px;">
+            <div style="background:rgba(74,122,86,0.06);border-left:3px solid var(--gold-dim);border-radius:0 10px 10px 0;padding:14px 18px;">
               <strong style="color:var(--gold);">누가, 언제, 어떤 상황에서?</strong><br>
               <span style="font-size:0.85rem;color:var(--text2);display:block;margin-top:4px;">작곡 나이: ${p.age}</span>
               <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.background}</p>
             </div>
-            <div style="background:rgba(139,92,246,0.06);border-left:3px solid var(--viola);border-radius:0 10px 10px 0;padding:14px 18px;">
+            <div style="background:rgba(74,122,86,0.06);border-left:3px solid var(--viola);border-radius:0 10px 10px 0;padding:14px 18px;">
               <strong style="color:var(--viola);">비올라의 역할</strong>
               <p style="font-size:0.88rem;color:var(--text2);margin-top:8px;">${p.violaRole}</p>
             </div>
