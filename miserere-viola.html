@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Miserere - Viola Part</title>
+<script src="https://cdn.jsdelivr.net/npm/abcjs@6.4.1/dist/abcjs-basic-min.js"></script>
+<style>
+  @media print {
+    .no-print { display: none !important; }
+    body { background: white; }
+    .sheet { box-shadow: none; border: none; padding: 40px 30px; }
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Georgia', 'Noto Serif KR', serif;
+    background: #f5f0e8;
+    display: flex; flex-direction: column;
+    align-items: center; padding: 30px 16px;
+    min-height: 100vh;
+  }
+  .toolbar {
+    display: flex; gap: 12px; margin-bottom: 20px; flex-wrap: wrap;
+    justify-content: center;
+  }
+  .toolbar button {
+    padding: 8px 20px; border-radius: 8px;
+    border: 1px solid #ccc; background: white;
+    font-family: inherit; font-size: 0.9rem;
+    cursor: pointer; transition: all 0.2s;
+  }
+  .toolbar button:hover { background: #333; color: white; border-color: #333; }
+  .sheet {
+    background: white; max-width: 800px; width: 100%;
+    padding: 60px 50px 40px; border-radius: 4px;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  }
+  .title-block { text-align: center; margin-bottom: 10px; }
+  .title-block h1 {
+    font-size: 2.2rem; font-weight: normal;
+    letter-spacing: 4px; margin-bottom: 4px;
+  }
+  .title-block .composer {
+    font-size: 0.9rem; color: #666;
+    text-align: right; margin-bottom: 2px;
+  }
+  .title-block .part-label {
+    font-size: 1.1rem; font-style: italic;
+    color: #444; margin-top: 12px; text-align: left;
+  }
+  #notation {
+    margin: 20px 0 0;
+  }
+  #notation svg { width: 100% !important; }
+  .note-box {
+    margin-top: 30px; padding: 16px 20px;
+    background: #faf8f4; border: 1px solid #e8e0d0;
+    border-radius: 8px; font-size: 0.85rem;
+    color: #666; line-height: 1.7;
+  }
+  .note-box strong { color: #444; }
+</style>
+</head>
+<body>
+
+<div class="toolbar no-print">
+  <button onclick="window.print()">인쇄하기</button>
+  <button onclick="window.close()">닫기</button>
+</div>
+
+<div class="sheet">
+  <div class="title-block">
+    <h1>Miserere</h1>
+    <div class="composer">G. Allegri</div>
+    <div class="composer">Arr. P. Martin</div>
+    <div class="part-label">Viola</div>
+  </div>
+
+  <div id="notation"></div>
+
+  <div class="note-box no-print">
+    <strong>참고:</strong> 이 악보는 총보(풀 스코어) 이미지에서 비올라 파트만 추출한 것입니다.
+    원본 총보와 대조하여 음 확인 후 사용하세요.
+    <br><strong>조성:</strong> Eb장조 (플랫 3개: Bb, Eb, Ab)
+    &nbsp;|&nbsp; <strong>박자:</strong> 4/4
+    &nbsp;|&nbsp; <strong>빠르기:</strong> Solemnly ♩= 60
+    &nbsp;|&nbsp; <strong>음자리표:</strong> 알토 음자리표 (비올라 전용)
+  </div>
+</div>
+
+<script>
+const abc = `X:1
+T:
+M:4/4
+L:1/8
+Q:1/4=60
+K:Eb clef=alto
+%%staffwidth 680
+%%topspace 0
+%%titlefont serif 1
+%%vocalfont serif 1
+%%barnumbers 1
+%%measurenb 1
+%%leftmargin 0.6cm
+%%rightmargin 0.6cm
+%%composerspace 0
+%%titlespace 0
+%%musicspace 0
+%%sysstaffsep 0
+%%staffsep 60
+"^Solemnly""^mf→p" B,3A, B,2 C2| B,4 A,2 G,2| A,2 B,2 (CB,) A,2| z8|
+z4 (G,A,) (B,C)| (B,A,) (G,A,) B,2 A,2||
+z4 z2 (G,A,)| (B,C) (B,A,) G,2 (A,B,)| (C"^V"B,) (CB,) A,2 (G,A,)|"^rall." !fermata!B,8|]
+`;
+
+const visualObj = ABCJS.renderAbc("notation", abc, {
+  responsive: "resize",
+  staffwidth: 680,
+  paddingtop: 0,
+  paddingbottom: 10,
+  paddingleft: 0,
+  paddingright: 0,
+  scale: 1.3,
+  add_classes: true,
+  format: {
+    headerfont: "serif 14",
+    gchordfont: "serif 11"
+  }
+});
+</script>
+
+</body>
+</html>

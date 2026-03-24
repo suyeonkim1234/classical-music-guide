@@ -1,0 +1,1787 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>클래식 음악 가이드 - 비올라 연주자를 위한 길잡이</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --bg: #0a0a10;
+  --bg2: #111118;
+  --bg-card: #18182a;
+  --bg-card-hover: #1f1f35;
+  --text: #e8e0d0;
+  --text2: #a09880;
+  --text3: #6a6050;
+  --gold: #d4a843;
+  --gold-dim: #9a7830;
+  --gold-bright: #f0c860;
+  --era-baroque: #b8860b;
+  --era-classical: #daa520;
+  --era-romantic: #c4384e;
+  --era-late: #7b3fa0;
+  --era-modern: #2e86de;
+  --viola: #8b5cf6;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Noto Serif KR', serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.8;
+  min-height: 100vh;
+}
+
+/* ===== NAV ===== */
+nav {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(10,10,16,0.92);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(212,168,67,0.15);
+  padding: 12px 0;
+}
+nav ul {
+  display: flex; gap: 8px; justify-content: center;
+  list-style: none; flex-wrap: wrap; padding: 0 16px;
+}
+nav a {
+  color: var(--text2); text-decoration: none;
+  font-size: 0.85rem; padding: 6px 14px;
+  border-radius: 20px; transition: all 0.3s;
+  border: 1px solid transparent;
+}
+nav a:hover, nav a.active {
+  color: var(--gold); border-color: var(--gold-dim);
+  background: rgba(212,168,67,0.08);
+}
+
+/* ===== COMMON ===== */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+section { padding: 80px 0; }
+h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--gold); }
+h2 {
+  font-size: 1.6rem; color: var(--gold); margin-bottom: 40px;
+  display: flex; align-items: center; gap: 12px;
+}
+h2::before { content: ''; width: 4px; height: 28px; background: var(--gold); border-radius: 2px; }
+h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
+
+/* ===== HERO ===== */
+.hero {
+  text-align: center; padding: 120px 24px 80px;
+  background: linear-gradient(180deg, rgba(212,168,67,0.06) 0%, transparent 60%);
+}
+.hero h1 { margin-bottom: 16px; line-height: 1.3; }
+.hero p { color: var(--text2); font-size: 1.05rem; max-width: 600px; margin: 0 auto; }
+.hero .badge {
+  display: inline-block; margin-top: 20px; padding: 6px 18px;
+  background: rgba(139,92,246,0.12); border: 1px solid var(--viola);
+  border-radius: 20px; color: var(--viola); font-size: 0.85rem;
+}
+
+/* ===== GENRE GUIDE ===== */
+.genre-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+.genre-card {
+  background: var(--bg-card); border-radius: 16px;
+  padding: 28px; border: 1px solid rgba(255,255,255,0.04);
+  transition: all 0.3s;
+}
+.genre-card:hover {
+  background: var(--bg-card-hover);
+  border-color: rgba(212,168,67,0.15);
+  transform: translateY(-2px);
+}
+.genre-card .hanja {
+  font-size: 2rem; color: var(--gold); margin-bottom: 4px;
+  font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+}
+.genre-card .meaning {
+  font-size: 0.82rem; color: var(--gold-dim); margin-bottom: 12px;
+  border-left: 2px solid var(--gold-dim); padding-left: 10px;
+}
+.genre-card .original {
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--text3); font-size: 0.85rem; font-style: italic;
+}
+.genre-card p { font-size: 0.92rem; color: var(--text2); margin-top: 8px; }
+.genre-card .example {
+  margin-top: 12px; font-size: 0.82rem; color: var(--text3);
+  padding: 8px 12px; background: rgba(0,0,0,0.2); border-radius: 8px;
+}
+
+/* ===== ENSEMBLE INFO ===== */
+.ensemble-box {
+  margin-top: 40px; padding: 28px;
+  background: rgba(139,92,246,0.06);
+  border: 1px solid rgba(139,92,246,0.2);
+  border-radius: 16px;
+}
+.ensemble-box h3 { color: var(--viola); margin-bottom: 16px; }
+.ensemble-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(260px,1fr));
+  gap: 12px;
+}
+.ensemble-item {
+  padding: 12px 16px; background: rgba(0,0,0,0.2); border-radius: 10px;
+  font-size: 0.9rem;
+}
+.ensemble-item strong { color: var(--text); }
+.ensemble-item span { color: var(--text2); font-size: 0.82rem; display: block; margin-top: 2px; }
+
+/* ===== ERA TIMELINE ===== */
+.era-timeline {
+  position: relative; overflow-x: auto; padding: 20px 0;
+}
+.era-bar-container {
+  display: flex; min-width: 800px; height: 80px;
+  border-radius: 12px; overflow: hidden; position: relative;
+}
+.era-block {
+  display: flex; flex-direction: column;
+  justify-content: center; align-items: center;
+  padding: 8px 16px; color: white; cursor: pointer;
+  transition: filter 0.3s; position: relative;
+  font-size: 0.9rem; font-weight: 600;
+}
+.era-block:hover { filter: brightness(1.2); }
+.era-block small { font-size: 0.72rem; opacity: 0.8; margin-top: 2px; }
+.era-block .char {
+  font-size: 0.72rem; opacity: 0.7; margin-top: 1px;
+  font-family: 'Noto Serif KR', serif;
+}
+.era-labels {
+  display: flex; min-width: 800px;
+  margin-top: 8px; font-size: 0.75rem; color: var(--text3);
+}
+.era-labels span { text-align: center; }
+
+/* ===== DEATH CHART ===== */
+.death-chart { margin-top: 20px; }
+.death-row {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 6px; font-size: 0.88rem;
+  padding: 8px 12px; border-radius: 8px;
+  transition: background 0.2s; cursor: pointer;
+}
+.death-row:hover { background: rgba(255,255,255,0.03); }
+.death-name { width: 100px; flex-shrink: 0; text-align: right; color: var(--text2); font-size: 0.82rem; }
+.death-bar-wrap { flex: 1; position: relative; height: 26px; }
+.death-bar {
+  height: 100%; border-radius: 4px; position: relative;
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 8px; font-size: 0.78rem; font-weight: 600;
+  min-width: 30px; transition: all 0.5s;
+}
+.death-cause {
+  flex-shrink: 0; width: 200px; font-size: 0.78rem; color: var(--text3);
+  padding-left: 8px;
+}
+.death-legend {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  margin-bottom: 24px; font-size: 0.78rem; color: var(--text2);
+}
+.death-legend span::before {
+  content: ''; display: inline-block; width: 10px; height: 10px;
+  border-radius: 2px; margin-right: 4px; vertical-align: middle;
+}
+
+/* ===== LIFESPAN TIMELINE ===== */
+.timeline-container {
+  position: relative; overflow-x: auto; padding: 20px 0;
+}
+.timeline-ruler {
+  display: flex; justify-content: space-between;
+  min-width: 900px; padding: 0 0 8px;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  font-size: 0.72rem; color: var(--text3);
+}
+.timeline-rows { min-width: 900px; margin-top: 4px; }
+.timeline-row {
+  display: flex; align-items: center; height: 32px;
+  position: relative; cursor: pointer;
+  transition: background 0.2s;
+}
+.timeline-row:hover { background: rgba(255,255,255,0.02); }
+.timeline-label {
+  width: 100px; flex-shrink: 0; text-align: right;
+  padding-right: 12px; font-size: 0.78rem; color: var(--text2);
+}
+.timeline-track { flex: 1; position: relative; height: 100%; }
+.timeline-bar {
+  position: absolute; height: 18px; top: 50%; transform: translateY(-50%);
+  border-radius: 3px; opacity: 0.85;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 0.65rem; color: rgba(255,255,255,0.9);
+  transition: opacity 0.3s, transform 0.3s;
+  overflow: hidden; white-space: nowrap;
+}
+.timeline-bar:hover { opacity: 1; transform: translateY(-50%) scaleY(1.3); z-index: 2; }
+.timeline-bar .tip {
+  display: none; position: absolute; bottom: 110%; left: 50%;
+  transform: translateX(-50%); background: #222; padding: 6px 12px;
+  border-radius: 8px; font-size: 0.78rem; white-space: nowrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+}
+.timeline-bar:hover .tip { display: block; }
+
+/* ===== COMPOSER SECTIONS ===== */
+.era-section { margin-bottom: 60px; }
+.era-section-title {
+  font-size: 1.1rem; color: var(--text2);
+  padding: 12px 20px; border-radius: 10px;
+  margin-bottom: 24px; display: inline-flex;
+  align-items: center; gap: 8px;
+}
+.era-dot { width: 12px; height: 12px; border-radius: 50%; }
+
+.composer-card {
+  background: var(--bg-card); border-radius: 16px;
+  margin-bottom: 24px; overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.04);
+  transition: border-color 0.3s;
+}
+.composer-card:hover { border-color: rgba(212,168,67,0.12); }
+.composer-header {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 24px 28px; cursor: pointer; flex-wrap: wrap; gap: 12px;
+}
+.composer-header:hover { background: rgba(255,255,255,0.015); }
+.composer-info h3 {
+  font-size: 1.2rem; margin-bottom: 2px;
+}
+.composer-info h3 .orig {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 0.9rem; color: var(--text3); font-weight: 400;
+  margin-left: 8px; font-style: italic;
+}
+.composer-meta {
+  font-size: 0.82rem; color: var(--text2);
+  display: flex; gap: 16px; flex-wrap: wrap; margin-top: 4px;
+}
+.composer-meta .death-info { color: var(--era-romantic); }
+.viola-badge {
+  display: flex; gap: 2px; align-items: center;
+  font-size: 0.82rem; color: var(--viola);
+}
+
+.composer-body {
+  display: none; padding: 0 28px 28px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.composer-body.open { display: block; padding-top: 24px; }
+
+.work-stats {
+  display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 20px;
+}
+.stat-chip {
+  padding: 6px 14px; border-radius: 20px;
+  background: rgba(255,255,255,0.04); font-size: 0.82rem;
+  color: var(--text2); border: 1px solid rgba(255,255,255,0.06);
+}
+.stat-chip strong { color: var(--gold); margin-right: 4px; }
+
+.famous-works { margin-top: 16px; }
+.famous-works h4 { font-size: 0.92rem; color: var(--gold-dim); margin-bottom: 12px; }
+.work-item {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 14px; margin-bottom: 6px;
+  background: rgba(0,0,0,0.2); border-radius: 10px;
+  cursor: pointer; transition: all 0.2s;
+}
+.work-item:hover {
+  background: rgba(212,168,67,0.08);
+  transform: translateX(4px);
+}
+.play-btn {
+  width: 32px; height: 32px; border-radius: 50%;
+  background: rgba(212,168,67,0.15); border: 1px solid var(--gold-dim);
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0; transition: all 0.2s; color: var(--gold);
+  font-size: 0.7rem;
+}
+.work-item:hover .play-btn { background: var(--gold); color: var(--bg); }
+.work-title { font-size: 0.88rem; color: var(--text); }
+.work-genre-tag {
+  font-size: 0.7rem; padding: 2px 8px; border-radius: 10px;
+  background: rgba(255,255,255,0.06); color: var(--text3);
+  flex-shrink: 0;
+}
+.work-genre-tag.quartet {
+  background: rgba(139,92,246,0.12); color: var(--viola);
+  border: 1px solid rgba(139,92,246,0.3);
+}
+
+.viola-note {
+  margin-top: 20px; padding: 14px 18px;
+  background: rgba(139,92,246,0.06);
+  border-left: 3px solid var(--viola);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.88rem; color: var(--text2);
+}
+.viola-note strong { color: var(--viola); }
+
+.death-story {
+  margin-top: 16px; padding: 14px 18px;
+  background: rgba(196,56,78,0.06);
+  border-left: 3px solid var(--era-romantic);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.85rem; color: var(--text2);
+}
+.death-story strong { color: var(--era-romantic); }
+
+/* ===== QUARTET GUIDE ===== */
+.quartet-list {
+  display: grid; grid-template-columns: repeat(auto-fill, minmax(300px,1fr));
+  gap: 16px; margin-top: 20px;
+}
+.quartet-item {
+  padding: 16px 20px; background: var(--bg-card);
+  border-radius: 12px; border: 1px solid rgba(139,92,246,0.1);
+  cursor: pointer; transition: all 0.2s;
+}
+.quartet-item:hover {
+  border-color: var(--viola);
+  transform: translateY(-2px);
+}
+.quartet-item .q-composer { font-size: 0.82rem; color: var(--viola); }
+.quartet-item .q-title { font-size: 0.95rem; margin: 4px 0; }
+.quartet-item .q-desc { font-size: 0.8rem; color: var(--text3); }
+
+/* ===== FILTER ===== */
+.filters {
+  display: flex; gap: 8px; margin-bottom: 30px; flex-wrap: wrap;
+}
+.filter-btn {
+  padding: 7px 18px; border-radius: 20px;
+  background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text2); font-size: 0.82rem; cursor: pointer;
+  font-family: 'Noto Serif KR', serif; transition: all 0.2s;
+}
+.filter-btn:hover, .filter-btn.active {
+  background: rgba(212,168,67,0.1); border-color: var(--gold-dim);
+  color: var(--gold);
+}
+.filter-btn.viola-filter.active {
+  background: rgba(139,92,246,0.12); border-color: var(--viola);
+  color: var(--viola);
+}
+
+/* ===== CHAMBER TREE ===== */
+.chamber-tree { margin-top: 16px; }
+.tree-level { margin-left: 20px; }
+.tree-node {
+  position: relative; padding: 10px 16px; margin: 6px 0;
+  border-radius: 10px; font-size: 0.88rem;
+  border-left: 3px solid transparent;
+}
+.tree-node.root {
+  background: rgba(212,168,67,0.1); border-left-color: var(--gold);
+  font-weight: 600; color: var(--gold); font-size: 1rem;
+  margin-left: 0;
+}
+.tree-node.branch {
+  background: rgba(255,255,255,0.03); border-left-color: var(--text3);
+  color: var(--text);
+}
+.tree-node.highlight {
+  background: rgba(139,92,246,0.1); border-left-color: var(--viola);
+  color: var(--viola); font-weight: 600;
+}
+.tree-node .tree-desc {
+  font-size: 0.78rem; color: var(--text3); font-weight: 400; margin-top: 2px;
+}
+.tree-node .tree-members {
+  font-size: 0.78rem; color: var(--text2); font-weight: 400;
+  background: rgba(0,0,0,0.15); padding: 4px 10px; border-radius: 6px;
+  display: inline-block; margin-top: 4px;
+}
+.tree-connector {
+  margin-left: 10px; border-left: 2px dashed rgba(255,255,255,0.08);
+  padding-left: 10px;
+}
+
+/* ===== BASICS SECTION ===== */
+.basics-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 32px;
+}
+.basics-block {
+  background: var(--bg-card); border-radius: 16px;
+  padding: 28px; border: 1px solid rgba(255,255,255,0.04);
+}
+.basics-block h3 {
+  font-size: 1.1rem; color: var(--gold); margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.basics-block h3 .hj {
+  font-size: 1.4rem; font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+}
+.basics-block .sub-explain {
+  font-size: 0.85rem; color: var(--gold-dim); margin-bottom: 16px;
+  border-left: 2px solid var(--gold-dim); padding-left: 12px;
+}
+.basics-table {
+  width: 100%; border-collapse: collapse; font-size: 0.88rem;
+}
+.basics-table th {
+  text-align: left; padding: 10px 14px;
+  background: rgba(0,0,0,0.25); color: var(--gold-dim);
+  font-weight: 600; font-size: 0.82rem;
+}
+.basics-table td {
+  padding: 10px 14px; border-bottom: 1px solid rgba(255,255,255,0.03);
+  color: var(--text2);
+}
+.basics-table tr:hover td { background: rgba(255,255,255,0.015); }
+.basics-table td:first-child { color: var(--text); font-weight: 500; }
+.basics-table .ital {
+  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  color: var(--text3); font-size: 0.85rem;
+}
+.basics-analogy {
+  margin-top: 14px; padding: 14px 18px;
+  background: rgba(212,168,67,0.06);
+  border-left: 3px solid var(--gold-dim);
+  border-radius: 0 10px 10px 0;
+  font-size: 0.88rem; color: var(--text2);
+}
+.basics-analogy strong { color: var(--gold); }
+.key-diagram {
+  display: flex; gap: 4px; margin: 16px 0; flex-wrap: wrap; align-items: flex-end;
+}
+.key-white, .key-black {
+  display: flex; align-items: flex-end; justify-content: center;
+  border-radius: 0 0 4px 4px; font-size: 0.72rem; padding-bottom: 6px;
+  font-weight: 600;
+}
+.key-white {
+  width: 42px; height: 80px; background: #f0ead6; color: #333;
+  border: 1px solid #ccc;
+}
+.key-black {
+  width: 28px; height: 52px; background: #222; color: #aaa;
+  margin: 0 -8px; z-index: 1; border: 1px solid #000;
+}
+.key-white.highlight { background: var(--gold); color: #111; }
+.movement-flow {
+  display: flex; gap: 0; align-items: center; flex-wrap: wrap;
+  margin: 16px 0;
+}
+.mvmt-box {
+  padding: 14px 20px; border-radius: 12px;
+  text-align: center; flex: 1; min-width: 120px;
+  position: relative;
+}
+.mvmt-box .mvmt-num { font-size: 0.75rem; color: rgba(255,255,255,0.6); }
+.mvmt-box .mvmt-tempo { font-size: 1rem; font-weight: 600; color: white; margin: 4px 0; }
+.mvmt-box .mvmt-char { font-size: 0.78rem; color: rgba(255,255,255,0.7); }
+.mvmt-arrow {
+  font-size: 1.2rem; color: var(--text3); padding: 0 4px; flex-shrink: 0;
+}
+.tempo-meter {
+  display: inline-block; height: 6px; border-radius: 3px;
+  margin-right: 8px; vertical-align: middle;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  text-align: center; padding: 40px 24px;
+  border-top: 1px solid rgba(255,255,255,0.04);
+  color: var(--text3); font-size: 0.8rem;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  h1 { font-size: 2rem; }
+  .hero { padding: 80px 20px 60px; }
+  section { padding: 50px 0; }
+  .container { padding: 0 16px; }
+  .death-cause { display: none; }
+  .death-name { width: 70px; font-size: 0.75rem; }
+  nav ul { gap: 4px; }
+  nav a { font-size: 0.75rem; padding: 5px 10px; }
+}
+
+/* ===== SCROLL ANIMATION ===== */
+.fade-in {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 0.6s, transform 0.6s;
+}
+.fade-in.visible { opacity: 1; transform: translateY(0); }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul>
+    <li><a href="#basics">기초 용어</a></li>
+    <li><a href="#genres">음악 형식</a></li>
+    <li><a href="#eras">시대 흐름</a></li>
+    <li><a href="#deaths">생애와 죽음</a></li>
+    <li><a href="#timeline">생몰 타임라인</a></li>
+    <li><a href="#composers">작곡가별 상세</a></li>
+    <li><a href="#quartets">현4 필수곡</a></li>
+  </ul>
+</nav>
+
+<header class="hero">
+  <h1>클래식 음악 가이드</h1>
+  <p>바로크부터 현대까지, 콰르텟 연주자를 위한 작곡가와 명곡 정리</p>
+  <div class="badge">비올라 연주자 전용</div>
+</header>
+
+<section id="basics"><div class="container">
+  <h2>기초부터 배우기</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:28px;">
+    클래식 음악을 이해하기 위해 꼭 알아야 할 기본 용어들. 한자 뜻풀이로 쉽게!
+  </p>
+  <div class="basics-grid" id="basicsGrid"></div>
+</div></section>
+
+<section id="genres"><div class="container">
+  <h2>음악 형식 가이드</h2>
+  <div class="genre-grid" id="genreGrid"></div>
+  <div class="ensemble-box" id="ensembleBox"></div>
+  <div class="ensemble-box" id="chamberTree" style="margin-top:24px;background:rgba(212,168,67,0.04);border-color:rgba(212,168,67,0.2);"></div>
+</div></section>
+
+<section id="eras"><div class="container">
+  <h2>시대 흐름</h2>
+  <div class="era-timeline" id="eraTimeline"></div>
+</div></section>
+
+<section id="deaths"><div class="container">
+  <h2>작곡가들의 생애와 죽음</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:24px;">
+    막대가 짧을수록 일찍 세상을 떠난 작곡가입니다. 이름을 클릭하면 상세 카드로 이동합니다.
+  </p>
+  <div class="death-chart" id="deathChart"></div>
+</div></section>
+
+<section id="timeline"><div class="container">
+  <h2>생몰 타임라인</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:24px;">
+    각 작곡가의 탄생부터 죽음까지. 막대 위에 마우스를 올리면 상세 정보가 나옵니다.
+  </p>
+  <div class="timeline-container" id="lifespanTimeline"></div>
+</div></section>
+
+<section id="composers"><div class="container">
+  <h2>작곡가별 상세</h2>
+  <div class="filters" id="filterBar"></div>
+  <div id="composerSections"></div>
+</div></section>
+
+<section id="quartets"><div class="container">
+  <h2>현악 4중주 필수 레퍼토리</h2>
+  <p style="color:var(--text2);font-size:0.9rem;margin-bottom:8px;">
+    콰르텟 연주자라면 반드시 알아야 할 현악 4중주 명곡들
+  </p>
+  <div class="quartet-list" id="quartetList"></div>
+</div></section>
+
+<footer>
+  <p>클래식 음악 가이드 &mdash; 비올라 연주자를 위한 길잡이</p>
+</footer>
+
+<script>
+// ===================================================================
+// DATA
+// ===================================================================
+
+// ===================================================================
+// BASICS DATA
+// ===================================================================
+
+const BASICS = {
+  classical: {
+    title: "클래식 음악",
+    hanja: "古典 音樂",
+    hanjaBreak: "古(옛 고) + 典(법 전) + 音(소리 음) + 樂(풍류 악)",
+    meaning: "옛 법도(전통)에 따른 소리의 풍류 — 즉, 오랜 세월 검증된 격조 있는 음악",
+    body: `<p>넓은 의미: 대중음악(팝, 힙합 등)과 구별되는 <strong>서양 예술 음악 전체</strong>를 말해요. 바로크(1600)부터 현대까지 약 400년의 음악.</p>
+    <p>좁은 의미: 하이든·모차르트·베토벤 시대(1750~1820)를 <strong>고전주의(Classical period)</strong>라고 불러요.</p>
+    <div class="basics-analogy"><strong>비유하면:</strong> "클래식"은 "치킨"과 비슷해요!<br>
+    넓은 의미: 튀긴 닭 전부 = 후라이드, 양념, 간장 다 포함<br>
+    좁은 의미: "치킨 하면 후라이드지!" = 특정 한 종류만 가리킴<br><br>
+    마찬가지로 "클래식"은 400년 음악 전체를 말하기도 하고, 그중 모차르트·베토벤 시대만 콕 집어 말하기도 해요!</div>`
+  },
+
+  keys: {
+    title: "조성 — 장조(長調)와 단조(短調)",
+    hanja: "調性",
+    hanjaBreak: "調(가락 조) + 性(성질 성)",
+    meaning: "음악의 가락이 가진 성질. 밝으면 장조, 어두우면 단조",
+    body: `
+    <p><strong>장조(長調)</strong> = 長(길 장) + 調(가락 조) → "긴(넓은) 음정의 가락" → <strong>밝고 활기찬 느낌</strong></p>
+    <p><strong>단조(短調)</strong> = 短(짧을 단) + 調(가락 조) → "짧은(좁은) 음정의 가락" → <strong>어둡고 슬픈 느낌</strong></p>
+    <div class="basics-analogy"><strong>쉽게 말하면:</strong> 장조 = 해가 쨍쨍한 날의 기분, 단조 = 비 오는 날의 기분.<br>
+    같은 노래도 장조로 치면 밝고, 단조로 바꾸면 슬퍼져요.<br><br>
+    <strong>인스타 필터로 비유하면:</strong> 같은 사진인데 밝은 필터(장조) 씌우면 화사하고, 어두운 필터(단조) 씌우면 감성적이 되는 것과 같아요!</div>
+    <h4 style="margin:20px 0 8px;color:var(--text);">음이름: 도레미 = CDEFGAB</h4>
+    <p style="font-size:0.88rem;color:var(--text2);">서양 음악은 알파벳으로 음이름을 써요:</p>
+    <table class="basics-table">
+      <tr><th>계이름</th><th>도</th><th>레</th><th>미</th><th>파</th><th>솔</th><th>라</th><th>시</th></tr>
+      <tr><td>알파벳</td><td><strong>C</strong></td><td><strong>D</strong></td><td><strong>E</strong></td><td><strong>F</strong></td><td><strong>G</strong></td><td><strong>A</strong></td><td><strong>B</strong></td></tr>
+    </table>
+    <div class="basics-analogy" style="margin-top:16px;">
+      <strong>그래서 "F장조"란?</strong> → 파(F)를 중심으로 한 밝은 조성<br>
+      <strong>"c단조"란?</strong> → 도(C)를 중심으로 한 어두운 조성<br>
+      <strong>관례:</strong> 장조는 대문자(F장조), 단조는 소문자(c단조)로 쓰기도 해요<br><br>
+      <strong>자주 나오는 표기:</strong><br>
+      • <strong>#(샤프)</strong> = 반음 올림. 예: F# = 파보다 반음 높은 음<br>
+      • <strong>b(플랫)</strong> = 반음 내림. 예: Bb(B플랫) = 시보다 반음 낮은 음<br>
+      • <strong>Eb장조</strong> = 미플랫을 중심으로 한 밝은 조성
+    </div>`
+  },
+
+  opus: {
+    title: "곡 번호 체계 — Op., K., BWV 등",
+    hanja: "作品番號",
+    hanjaBreak: "作(지을 작) + 品(물건 품) + 番(차례 번) + 號(이름 호)",
+    meaning: "작품의 차례 번호. 작곡가가 몇 번째로 쓴 곡인지 표시",
+    body: `
+    <table class="basics-table">
+      <tr><th>약자</th><th>뜻</th><th>설명</th><th>예시</th></tr>
+      <tr>
+        <td><strong>Op.</strong></td>
+        <td>Opus (작품)</td>
+        <td>출판 순서대로 붙인 번호. 가장 흔한 표기.</td>
+        <td>Op.51 = 51번째 출판 작품</td>
+      </tr>
+      <tr>
+        <td><strong>-1, No.1</strong></td>
+        <td>Number (번호)</td>
+        <td>같은 Op. 안에 곡이 여러 개일 때 구분. <strong>Op.51-1 = "51번째 작품집의 첫 번째 곡"</strong></td>
+        <td>Op.76-3 = 76번 작품집 중 3번째</td>
+      </tr>
+      <tr>
+        <td><strong>K.</strong></td>
+        <td>Köchel (쾨헬)</td>
+        <td>모차르트 전용 번호. 학자 쾨헬이 시간순으로 정리.</td>
+        <td>K.364 = 쾨헬 목록 364번</td>
+      </tr>
+      <tr>
+        <td><strong>BWV</strong></td>
+        <td>Bach-Werke-Verzeichnis</td>
+        <td>바흐 전용 번호. "바흐 작품 목록"이란 뜻.</td>
+        <td>BWV 1007 = 무반주 첼로 모음곡 1번</td>
+      </tr>
+      <tr>
+        <td><strong>RV</strong></td>
+        <td>Ryom-Verzeichnis</td>
+        <td>비발디 전용 번호.</td>
+        <td>RV.589 = 글로리아</td>
+      </tr>
+      <tr>
+        <td><strong>D.</strong></td>
+        <td>Deutsch (도이치)</td>
+        <td>슈베르트 전용 번호.</td>
+        <td>D.810 = "죽음과 소녀" 현4</td>
+      </tr>
+    </table>
+    <div class="basics-analogy" style="margin-top:16px;">
+      <strong>비유하면:</strong> Op.는 "앨범 번호", No.는 "앨범 안의 트랙 번호"예요.<br>
+      <strong>Op.51-1</strong> = "51번 앨범의 1번 트랙"<br>
+      <strong>Op.76-3</strong> = "76번 앨범의 3번 트랙"<br><br>
+      K.나 BWV 같은 건 워낙 곡이 많은 작곡가라 학자들이 나중에 따로 번호를 매긴 거예요.
+    </div>`
+  },
+
+  tempo: {
+    title: "빠르기말 (템포)",
+    hanja: "速度標語",
+    hanjaBreak: "速(빠를 속) + 度(법도 도) + 標(표할 표) + 語(말씀 어)",
+    meaning: "음악의 빠르기를 표시하는 이탈리아어 용어",
+    body: `
+    <p style="font-size:0.88rem;color:var(--text2);margin-bottom:12px;">클래식 음악은 빠르기를 이탈리아어로 써요. 악장 이름으로도 쓰여요 (예: "2악장 Adagio").</p>
+    <table class="basics-table">
+      <tr><th>이탈리아어</th><th>읽는 법</th><th>뜻</th><th>BPM (1분에 몇 박)</th><th>느낌</th></tr>
+      <tr><td><strong>Grave</strong></td><td>그라베</td><td>매우 느리게, 장중하게</td><td>~40</td><td><span class="tempo-meter" style="width:20px;background:#4a6fa5;"></span>무겁고 엄숙</td></tr>
+      <tr><td><strong>Largo</strong></td><td>라르고</td><td>아주 느리게, 넓게</td><td>40~60</td><td><span class="tempo-meter" style="width:30px;background:#4a6fa5;"></span>깊고 서정적</td></tr>
+      <tr><td><strong>Adagio</strong></td><td>아다지오</td><td>느리게, 편안하게</td><td>60~76</td><td><span class="tempo-meter" style="width:40px;background:#5b8c5a;"></span>아름다운 느린 악장</td></tr>
+      <tr><td><strong>Andante</strong></td><td>안단테</td><td>걸어가는 빠르기로</td><td>76~108</td><td><span class="tempo-meter" style="width:55px;background:#a0a040;"></span>산책하듯 여유롭게</td></tr>
+      <tr><td><strong>Moderato</strong></td><td>모데라토</td><td>보통 빠르기로</td><td>108~120</td><td><span class="tempo-meter" style="width:65px;background:#c0a030;"></span>적당한 속도</td></tr>
+      <tr><td><strong>Allegretto</strong></td><td>알레그레토</td><td>조금 빠르게</td><td>112~120</td><td><span class="tempo-meter" style="width:70px;background:#d4a843;"></span>경쾌하지만 절제</td></tr>
+      <tr><td><strong>Allegro</strong></td><td>알레그로</td><td>빠르게, 활기차게</td><td>120~156</td><td><span class="tempo-meter" style="width:85px;background:#c4384e;"></span>가장 흔한 빠른 악장</td></tr>
+      <tr><td><strong>Vivace</strong></td><td>비바체</td><td>생기 있게, 아주 빠르게</td><td>156~176</td><td><span class="tempo-meter" style="width:95px;background:#d44;"></span>활발하고 에너지 넘침</td></tr>
+      <tr><td><strong>Presto</strong></td><td>프레스토</td><td>매우 빠르게</td><td>168~200</td><td><span class="tempo-meter" style="width:105px;background:#e33;"></span>손가락이 불타는 속도</td></tr>
+    </table>
+    <div class="basics-analogy" style="margin-top:16px;">
+      <strong>걸음 속도로 비유하면:</strong><br>
+      • <strong>Grave~Largo</strong> = 할머니가 지팡이 짚고 천천히 걷는 속도<br>
+      • <strong>Adagio</strong> = 공원에서 산책하는 속도. "아~ 다지오~" 느긋한 느낌<br>
+      • <strong>Andante</strong> = 출근할 때 걷는 보통 속도 (이탈리아어로 "걷다"에서 옴)<br>
+      • <strong>Moderato</strong> = 약속 시간 다가올 때 빠른 걸음<br>
+      • <strong>Allegro</strong> = "알레! 가자!" 뛰기 시작 (이탈리아어로 "즐겁게")<br>
+      • <strong>Vivace</strong> = 버스 놓칠까 봐 전력 질주<br>
+      • <strong>Presto</strong> = 마술사가 "프레스토!" → 순식간에 뿅! 손가락이 불타는 속도
+    </div>`
+  },
+
+  movements: {
+    title: "악장 구조 — 1악장, 2악장, 3악장...",
+    hanja: "樂章",
+    hanjaBreak: "樂(풍류 악) + 章(글 장)",
+    meaning: "음악의 한 단락. 책의 '장(chapter)'과 같은 개념",
+    body: `
+    <p style="font-size:0.88rem;color:var(--text2);margin-bottom:20px;">클래식 곡은 보통 여러 <strong>악장</strong>으로 구성돼요. 악장 사이에는 잠깐 멈춤(쉼)이 있어요. <strong>박수는 전 악장이 끝난 후에!</strong></p>
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:28px;">
+      <div style="background:rgba(196,56,78,0.08);border:1px solid rgba(196,56,78,0.2);border-radius:14px;padding:20px;">
+        <div style="font-size:1.6rem;color:var(--era-romantic);font-family:'Cormorant Garamond','Noto Serif KR',serif;">交響曲</div>
+        <div style="font-size:0.82rem;color:var(--era-romantic);margin-bottom:8px;">交(사귈 교) + 響(울릴 향) + 曲(곡 곡)</div>
+        <h4 style="color:var(--text);margin-bottom:6px;">교향곡 (Symphony)</h4>
+        <p style="font-size:0.88rem;color:var(--text2);">
+          <strong>오케스트라 전체</strong>(50~100명)가 연주하는 가장 큰 규모의 곡.<br>
+          보통 <strong>4개의 악장</strong>으로 구성.<br>
+          작곡가의 세계관을 가장 웅장하게 표현하는 장르.
+        </p>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+          비유: 영화로 치면 <strong>블록버스터 대작</strong>. 최대 인원이 총동원.
+        </div>
+      </div>
+
+      <div style="background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:14px;padding:20px;">
+        <div style="font-size:1.6rem;color:var(--gold);font-family:'Cormorant Garamond','Noto Serif KR',serif;">奏鳴曲</div>
+        <div style="font-size:0.82rem;color:var(--gold-dim);margin-bottom:8px;">奏(아뢸 주) + 鳴(울 명) + 曲(곡 곡)</div>
+        <h4 style="color:var(--text);margin-bottom:6px;">소나타 (Sonata)</h4>
+        <p style="font-size:0.88rem;color:var(--text2);">
+          <strong>독주 악기</strong>(+피아노 반주)를 위한 곡.<br>
+          보통 <strong>3~4개의 악장</strong>으로 구성.<br>
+          악기 하나의 가능성을 깊이 탐구하는 장르.
+        </p>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+          비유: 영화로 치면 <strong>1인극 혹은 2인극</strong>. 배우 한 명의 연기력이 핵심.
+        </div>
+      </div>
+
+      <div style="background:rgba(46,134,222,0.08);border:1px solid rgba(46,134,222,0.2);border-radius:14px;padding:20px;">
+        <div style="font-size:1.6rem;color:var(--era-modern);font-family:'Cormorant Garamond','Noto Serif KR',serif;">協奏曲</div>
+        <div style="font-size:0.82rem;color:var(--era-modern);margin-bottom:8px;">協(합할 협) + 奏(아뢸 주) + 曲(곡 곡)</div>
+        <h4 style="color:var(--text);margin-bottom:6px;">협주곡 (Concerto)</h4>
+        <p style="font-size:0.88rem;color:var(--text2);">
+          <strong>독주자 1명 + 오케스트라</strong>가 함께 연주.<br>
+          보통 <strong>3개의 악장</strong>으로 구성.<br>
+          독주자가 주인공, 오케스트라가 대화 상대.
+        </p>
+        <div style="font-size:0.78rem;color:var(--text3);margin-top:8px;padding:6px 10px;background:rgba(0,0,0,0.15);border-radius:6px;">
+          비유: 영화로 치면 <strong>주연 1명 + 조연 군단</strong>. 주인공의 기교가 빛남.
+        </div>
+      </div>
+    </div>
+
+    <div style="background:rgba(139,92,246,0.06);border:1px solid rgba(139,92,246,0.15);border-radius:14px;padding:20px;margin-bottom:28px;">
+      <h4 style="color:var(--viola);margin-bottom:10px;">잠깐! "소나타"는 두 가지 뜻으로 쓰여요</h4>
+      <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:12px;">
+        <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:14px;">
+          <strong style="color:var(--text);">1. 곡의 종류 (장르)</strong>
+          <p style="font-size:0.85rem;color:var(--text2);margin-top:4px;">
+            "베토벤 피아노 소나타 '월광'"<br>
+            → 피아노를 위한 곡이라는 뜻
+          </p>
+        </div>
+        <div style="background:rgba(0,0,0,0.15);border-radius:10px;padding:14px;">
+          <strong style="color:var(--text);">2. 악장의 구조 (형식)</strong>
+          <p style="font-size:0.85rem;color:var(--text2);margin-top:4px;">
+            "1악장은 소나타 형식이다"<br>
+            → 제시부→발전부→재현부라는 짜임새를 말하는 것<br>
+            <span style="font-size:0.78rem;color:var(--text3);">(아래에서 자세히 설명!)</span>
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h4 style="color:var(--text);margin-bottom:12px;">교향곡·소나타·현악4중주의 전형적 4악장 구조</h4>
+    <p style="font-size:0.82rem;color:var(--text3);margin-bottom:12px;">교향곡, 소나타, 현악4중주 모두 이 구조를 따라요. 편성(인원수)만 다를 뿐 뼈대는 같아요!</p>
+    <div class="movement-flow">
+      <div class="mvmt-box" style="background:var(--era-romantic);">
+        <div class="mvmt-num">1악장</div>
+        <div class="mvmt-tempo">Allegro</div>
+        <div class="mvmt-char">빠르고 극적<br><small>소나타 형식</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:#4a6fa5;">
+        <div class="mvmt-num">2악장</div>
+        <div class="mvmt-tempo">Adagio / Andante</div>
+        <div class="mvmt-char">느리고 아름다운<br><small>서정적 노래</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:#5b8c5a;">
+        <div class="mvmt-num">3악장</div>
+        <div class="mvmt-tempo">Menuetto / Scherzo</div>
+        <div class="mvmt-char">춤곡 느낌<br><small>3박자, 가벼움</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:var(--era-baroque);">
+        <div class="mvmt-num">4악장</div>
+        <div class="mvmt-tempo">Allegro / Presto</div>
+        <div class="mvmt-char">빠르고 화려한 피날레<br><small>대단원의 마무리</small></div>
+      </div>
+    </div>
+
+    <h4 style="color:var(--text);margin:24px 0 12px;">협주곡의 전형적 3악장 구조</h4>
+    <div class="movement-flow">
+      <div class="mvmt-box" style="background:var(--era-romantic);">
+        <div class="mvmt-num">1악장</div>
+        <div class="mvmt-tempo">Allegro</div>
+        <div class="mvmt-char">빠르게<br><small>독주자 등장·기교</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:#4a6fa5;">
+        <div class="mvmt-num">2악장</div>
+        <div class="mvmt-tempo">Adagio / Andante</div>
+        <div class="mvmt-char">느리게<br><small>감성적 선율</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:var(--era-baroque);">
+        <div class="mvmt-num">3악장</div>
+        <div class="mvmt-tempo">Allegro / Presto</div>
+        <div class="mvmt-char">빠르게<br><small>화려한 마무리</small></div>
+      </div>
+    </div>
+
+    <div class="basics-analogy" style="margin-top:20px;">
+      <strong>한 편의 드라마에 비유하면:</strong><br>
+      • 1악장 = 첫 회! 주인공 등장하고 사건이 터짐 (긴장감 UP)<br>
+      • 2악장 = 중반부 감성 에피소드. 주인공의 과거 회상, 로맨스 장면<br>
+      • 3악장 = 긴장 풀어주는 쉬어가는 회. 댄스 파티, 웃기는 에피소드<br>
+      • 4악장 = 시즌 피날레! 모든 복선이 회수되며 폭발적 클라이맥스<br><br>
+      <strong>코스 요리로 비유하면:</strong> 1악장=메인 스테이크, 2악장=부드러운 수프, 3악장=가벼운 샐러드, 4악장=화려한 디저트<br><br>
+      <strong>Menuetto(미뉴에트)</strong> = 궁전 무도회에서 추는 우아한 춤 (3박자 왈츠 느낌)<br>
+      <strong>Scherzo(스케르초)</strong> = "농담"이란 뜻! 베토벤이 미뉴에트 대신 도입. 더 거칠고 장난스러움.
+    </div>
+
+    <h4 style="color:var(--gold);margin:28px 0 12px;">1악장의 "소나타 형식"이란?</h4>
+    <p style="font-size:0.85rem;color:var(--text2);margin-bottom:14px;">위에서 1악장에 "소나타 형식"이라고 적혀있죠? 이건 1악장 안의 구조(짜임새)를 말해요:</p>
+    <div class="movement-flow">
+      <div class="mvmt-box" style="background:#6a5acd;min-width:140px;">
+        <div class="mvmt-num">제시부</div>
+        <div class="mvmt-tempo" style="font-size:0.85rem;">Exposition</div>
+        <div class="mvmt-char">주제(멜로디) 소개<br><small>"주인공 A와 B 등장"</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:var(--era-romantic);min-width:140px;">
+        <div class="mvmt-num">발전부</div>
+        <div class="mvmt-tempo" style="font-size:0.85rem;">Development</div>
+        <div class="mvmt-char">주제를 변형·충돌<br><small>"갈등과 모험의 전개"</small></div>
+      </div>
+      <div class="mvmt-arrow">→</div>
+      <div class="mvmt-box" style="background:#2e7d32;min-width:140px;">
+        <div class="mvmt-num">재현부</div>
+        <div class="mvmt-tempo" style="font-size:0.85rem;">Recapitulation</div>
+        <div class="mvmt-char">주제가 돌아옴<br><small>"주인공이 다시! 해결"</small></div>
+      </div>
+    </div>
+    <div class="basics-analogy" style="margin-top:14px;">
+      <strong>웹툰으로 비유하면:</strong><br>
+      제시부 = 1~3화에서 주인공 A(밝은 성격)와 B(차가운 성격)가 등장<br>
+      발전부 = 중반부에서 A와 B가 부딪히고, 새로운 사건이 터지고, 관계가 꼬임<br>
+      재현부 = 마지막에 A와 B가 다시 등장하지만 성장한 모습으로! 갈등 해결<br><br>
+      <strong>이게 왜 중요하냐면:</strong> 교향곡, 소나타, 현악4중주, 협주곡의 1악장은 거의 다 이 구조예요!<br>
+      콘서트에서 1악장 들을 때 "아, 지금 주인공 소개하는 중이구나" / "지금 갈등 파트라 긴장감 있네" / "주제가 돌아왔다, 곧 끝나겠구나" 이렇게 들을 수 있어요.
+    </div>`
+  },
+
+  expression: {
+    title: "자주 나오는 음악 용어",
+    hanja: "音樂用語",
+    hanjaBreak: "기타 악보·프로그램에서 자주 보이는 표현들",
+    meaning: "",
+    body: `
+    <table class="basics-table">
+      <tr><th>용어</th><th>읽는 법</th><th>뜻</th><th>쉬운 비유</th></tr>
+      <tr><td><strong>forte (f)</strong></td><td>포르테</td><td>세게 (큰 소리로)</td><td>이어폰 볼륨 80%</td></tr>
+      <tr><td><strong>piano (p)</strong></td><td>피아노</td><td>여리게 (작은 소리로)</td><td>볼륨 20%. 악기 이름이 여기서 옴!</td></tr>
+      <tr><td><strong>fortissimo (ff)</strong></td><td>포르티시모</td><td>매우 세게</td><td>볼륨 MAX! 귀 터질 듯</td></tr>
+      <tr><td><strong>pianissimo (pp)</strong></td><td>피아니시모</td><td>매우 여리게</td><td>도서관에서 속삭이는 수준</td></tr>
+      <tr><td><strong>crescendo</strong></td><td>크레셴도</td><td>점점 세게</td><td>볼륨 다이얼을 천천히 올리는 중</td></tr>
+      <tr><td><strong>diminuendo</strong></td><td>디미누엔도</td><td>점점 여리게</td><td>노래가 페이드아웃 되는 느낌</td></tr>
+      <tr><td><strong>pizzicato</strong></td><td>피치카토</td><td>활 대신 손가락으로 줄을 퉁기기</td><td>기타 퉁기듯! 통통 튀는 소리</td></tr>
+      <tr><td><strong>arco</strong></td><td>아르코</td><td>다시 활로 켜기</td><td>퉁기기 끝, 다시 원래대로!</td></tr>
+      <tr><td><strong>vibrato</strong></td><td>비브라토</td><td>음을 떨리게 하기</td><td>노래방에서 떨림 넣는 것과 같은 원리</td></tr>
+      <tr><td><strong>legato</strong></td><td>레가토</td><td>음을 이어서 부드럽게</td><td>미끄럼틀 타듯 음이 매끄럽게 이어짐</td></tr>
+      <tr><td><strong>staccato</strong></td><td>스타카토</td><td>음을 짧게 끊어서</td><td>키보드 타자치듯 톡톡톡 끊어서</td></tr>
+      <tr><td><strong>ritardando (rit.)</strong></td><td>리타르단도</td><td>점점 느리게</td><td>목적지 앞에서 브레이크 밟는 것</td></tr>
+      <tr><td><strong>a tempo</strong></td><td>아 템포</td><td>원래 빠르기로 돌아가기</td><td>신호 바뀌어서 다시 가속!</td></tr>
+      <tr><td><strong>con sordino</strong></td><td>콘 소르디노</td><td>약음기 끼고 (뮤트)</td><td>볼륨 줄인 스피커. 몽환적 소리</td></tr>
+      <tr><td><strong>cadenza</strong></td><td>카덴차</td><td>독주자가 혼자 자유롭게 연주하는 부분</td><td>래퍼의 프리스타일 솔로 타임!</td></tr>
+    </table>
+    <div class="basics-analogy" style="margin-top:16px;">
+      <strong>비올라 연주자가 특히 잘 알아야 할 것:</strong><br>
+      • <strong>pizz.</strong> = 피치카토. 활 내려놓고 손가락으로 퉁!<br>
+      • <strong>arco</strong> = 다시 활로. pizz. 뒤에 항상 따라옴<br>
+      • <strong>sul ponticello</strong> = 브릿지 가까이에서 켜기 (유리 깨지는 듯한 소리)<br>
+      • <strong>sul tasto</strong> = 지판 위에서 켜기 (부드럽고 몽환적)
+    </div>`
+  }
+};
+
+const GENRES = [
+  {
+    name: "교향곡",
+    hanja: "交響曲",
+    hanjaBreak: "交(사귈 교) + 響(울릴 향) + 曲(곡 곡)",
+    meaning: "여러 소리가 서로 사귀며 울려 퍼지는 곡",
+    original: "Symphony",
+    desc: "오케스트라 전체(50~100명)가 연주하는 가장 큰 규모의 곡. 보통 4악장. <strong>비유:</strong> 마블 영화 같은 블록버스터! 배우(악기) 100명 총출동, 감독(지휘자)이 전체를 이끔.",
+    example: "베토벤 교향곡 5번 '운명', 차이콥스키 교향곡 6번 '비창'"
+  },
+  {
+    name: "협주곡",
+    hanja: "協奏曲",
+    hanjaBreak: "協(합할 협) + 奏(아뢸 주) + 曲(곡 곡)",
+    meaning: "독주자와 오케스트라가 힘을 합쳐 연주하는 곡",
+    original: "Concerto",
+    desc: "독주자 1명이 주인공, 오케스트라가 반주·대화 상대. <strong>비유:</strong> K-POP 가수의 콘서트! 메인 가수(독주자) 한 명이 백댄서(오케스트라)와 함께 무대를 빛냄.",
+    example: "모차르트 피아노 협주곡, 바르톡 비올라 협주곡"
+  },
+  {
+    name: "소나타",
+    hanja: "奏鳴曲",
+    hanjaBreak: "奏(아뢸 주) + 鳴(울 명) + 曲(곡 곡)",
+    meaning: "악기를 연주하여 울리는 곡",
+    original: "Sonata",
+    desc: "독주 악기(+피아노 반주)를 위한 곡. 보통 3~4악장. <strong>비유:</strong> 유튜버의 1인 콘텐츠 or 2인 토크쇼. 한두 명이서 깊은 이야기를 풀어내는 느낌.",
+    example: "베토벤 피아노 소나타 '월광', 브람스 비올라 소나타 Op.120"
+  },
+  {
+    name: "실내악",
+    hanja: "室內樂",
+    hanjaBreak: "室(집 실) + 內(안 내) + 樂(풍류 악)",
+    meaning: "방 안에서 소규모로 연주하는 음악",
+    original: "Chamber Music",
+    desc: "2~9명이 연주하는 소규모 앙상블. <strong>비유:</strong> 친구 4명이 카페에서 수다 떠는 것! 서로 말 주고받듯 대화하는 음악. 콰르텟이 바로 이것!",
+    example: "하이든 현악4중주, 슈베르트 '송어' 피아노5중주"
+  },
+  {
+    name: "오페라",
+    hanja: "歌劇",
+    hanjaBreak: "歌(노래 가) + 劇(연극 극)",
+    meaning: "노래로 하는 연극",
+    original: "Opera",
+    desc: "성악가가 노래하며 연기 + 오케스트라 반주 + 무대미술. <strong>비유:</strong> 뮤지컬의 원조! 대사를 다 노래로 하는 초호화 뮤지컬이라고 생각하면 됨.",
+    example: "모차르트 '마술피리', 비제 '카르멘'"
+  },
+  {
+    name: "독주곡",
+    hanja: "獨奏曲",
+    hanjaBreak: "獨(홀로 독) + 奏(아뢸 주) + 曲(곡 곡)",
+    meaning: "홀로 연주하는 곡",
+    original: "Solo",
+    desc: "반주 없이 악기 딱 하나로 연주. <strong>비유:</strong> 아무 반주 없이 무대에 혼자 선 코미디언의 스탠드업. 실력이 날 것 그대로 드러남!",
+    example: "바흐 무반주 첼로 모음곡, 레거 비올라 무반주 모음곡"
+  },
+  {
+    name: "서곡",
+    hanja: "序曲",
+    hanjaBreak: "序(차례 서) + 曲(곡 곡)",
+    meaning: "본 곡 앞에 나오는 차례(도입) 곡",
+    original: "Overture",
+    desc: "오페라나 연극 시작 전에 오케스트라가 연주하는 짧은 곡. <strong>비유:</strong> 영화 시작 전 나오는 예고편(트레일러)! '이런 분위기의 이야기가 펼쳐질 거예요~' 하고 미리 귀띔.",
+    example: "로시니 '세비야의 이발사' 서곡, 멘델스존 '한여름 밤의 꿈' 서곡"
+  },
+  {
+    name: "가곡",
+    hanja: "歌曲",
+    hanjaBreak: "歌(노래 가) + 曲(곡 곡)",
+    meaning: "노래 곡. 피아노 반주에 맞춰 부르는 예술 노래",
+    original: "Lied",
+    desc: "성악가 1명 + 피아노 반주. 시(詩)에 음악을 입힌 짧은 예술 노래. <strong>비유:</strong> 인디 가수가 피아노 하나만 놓고 감성적으로 부르는 발라드. 가사(시)가 핵심!",
+    example: "슈베르트 '마왕', 슈만 '시인의 사랑'"
+  }
+];
+
+const ENSEMBLES = [
+  { name: "현악 4중주 (String Quartet)", members: "바이올린 2 + 비올라 1 + 첼로 1", note: "실내악의 왕! 4인조 밴드처럼 각자 역할이 뚜렷. 바이올린=보컬, 비올라=화음, 첼로=베이스" },
+  { name: "현악 5중주 (String Quintet)", members: "현4 + 비올라 or 첼로 1 추가", note: "4인조에 멤버 1명 영입! 모차르트는 비올라를 추가해 더 풍성한 소리를 만듦" },
+  { name: "피아노 3중주 (Piano Trio)", members: "피아노 + 바이올린 + 첼로", note: "3인조 발라드 그룹 느낌. 비올라는 빠져서 좀 서운한 편성..." },
+  { name: "피아노 5중주 (Piano Quintet)", members: "피아노 + 현악4중주", note: "피아노가 MC, 현악4중주가 패널인 토크쇼. 슈베르트 '송어'가 대표곡" },
+  { name: "현악 6중주 (String Sextet)", members: "바이올린 2 + 비올라 2 + 첼로 2", note: "비올라가 2대! 소리가 더 두껍고 따뜻. 브람스, 차이콥스키의 명작이 있음" },
+  { name: "현악 8중주 (String Octet)", members: "바이올린 4 + 비올라 2 + 첼로 2", note: "미니 오케스트라 느낌. 멘델스존이 16세 때 작곡한 걸작!" },
+];
+
+const ERA_DEFS = [
+  { name: "바로크", en: "Baroque", start: 1600, end: 1750, color: "var(--era-baroque)", char: "화려하고 장식적, 통주저음", hanja: "巴洛克" },
+  { name: "고전주의", en: "Classical", start: 1750, end: 1820, color: "var(--era-classical)", char: "균형·명료·형식미", hanja: "古典主義" },
+  { name: "낭만주의", en: "Romantic", start: 1800, end: 1910, color: "var(--era-romantic)", char: "감정·개성·자유로운 표현", hanja: "浪漫主義" },
+  { name: "후기낭만·인상주의", en: "Late Romantic", start: 1880, end: 1940, color: "var(--era-late)", char: "거대한 편성, 색채적 화성", hanja: "後期浪漫" },
+  { name: "현대", en: "Modern", start: 1900, end: 2000, color: "var(--era-modern)", char: "실험·불협화음·새로운 기법", hanja: "現代" },
+];
+
+const COMPOSERS = [
+  {
+    id: "vivaldi", name: "비발디", original: "Antonio Vivaldi",
+    nation: "이탈리아", birth: 1678, death: 1741, era: "바로크",
+    deathAge: 63, deathCause: "내장 염증",
+    deathStory: "빈에서 가난 속에 사망. '사계'로 유명했지만 말년에는 완전히 잊혀져, 무덤조차 알려지지 않았다.",
+    violaScore: 2,
+    style: "화려하고 생동감 넘치는 멜로디. 자연을 음악으로 묘사하는 데 천재적. 같은 패턴을 반복하면서 점점 고조시키는 기법. 빠르고 에너지 넘치는 곡이 많다.",
+    personality: "빨간 머리 신부(사제)였지만 성격은 자유분방. 요즘이면 화려한 퍼포먼스를 좋아하는 유튜브 스타 바이올리니스트. SNS에 연주 영상 엄청 올릴 타입. 자기PR 잘하지만 유행 지나면 금방 잊히는 걸 두려워할 듯.",
+    works: { "협주곡": 500, "오페라": 49, "소나타": 73 },
+    famous: [
+      { t: "사계 (Le quattro stagioni)", g: "협주곡", q: "Vivaldi Four Seasons complete" },
+      { t: "비올라 다모레 협주곡 d단조 RV.394", g: "협주곡", q: "Vivaldi Viola d'amore Concerto RV 394" },
+      { t: "글로리아 RV.589", g: "종교곡", q: "Vivaldi Gloria RV 589" },
+    ],
+    violaNote: "비올라 다모레(비올라의 사촌 악기)를 위한 협주곡 다수 작곡"
+  },
+  {
+    id: "bach", name: "바흐", original: "J.S. Bach",
+    nation: "독일", birth: 1685, death: 1750, era: "바로크",
+    deathAge: 65, deathCause: "뇌졸중·시력 상실",
+    deathStory: "말년에 시력이 급격히 나빠져 수술을 받았으나 실패, 완전히 실명. 뇌졸중으로 라이프치히에서 사망.",
+    violaScore: 3,
+    style: "수학적 정밀함과 감정의 깊이를 동시에. 대위법(여러 선율이 동시에 얽히는 기법)의 절대 왕. 모든 성부가 독립적이면서도 완벽하게 맞물림. 듣는 사람보다 '신'을 위해 작곡한다고 말함.",
+    personality: "가족 중심의 성실한 직장인. 자녀 20명, 일요일마다 교회에 새 곡 납품. 요즘이면 마감에 쫓기면서도 완벽주의를 놓지 않는 시니어 개발자. 겸손하지만 실력에 대한 자부심 강함. 조용히 자기 할 일 하는 장인 타입.",
+    works: { "칸타타": 200, "협주곡": 20, "건반곡": 100, "관현악모음곡": 4 },
+    famous: [
+      { t: "브란덴부르크 협주곡 6번 (비올라 주역!)", g: "협주곡", q: "Bach Brandenburg Concerto No.6" },
+      { t: "마태 수난곡", g: "종교곡", q: "Bach St Matthew Passion" },
+      { t: "무반주 첼로 모음곡", g: "독주곡", q: "Bach Cello Suite No.1" },
+      { t: "토카타와 푸가 d단조", g: "건반곡", q: "Bach Toccata and Fugue D minor" },
+    ],
+    violaNote: "브란덴부르크 협주곡 6번에서 비올라 2대가 주역! 바이올린 없이 비올라가 전면에 나서는 보기 드문 곡."
+  },
+  {
+    id: "haydn", name: "하이든", original: "Joseph Haydn",
+    nation: "오스트리아", birth: 1732, death: 1809, era: "고전주의",
+    deathAge: 77, deathCause: "노환 (자연사)",
+    deathStory: "77세까지 장수. 나폴레옹 군대가 빈을 점령하던 시기에 평화롭게 사망. 당대 최고의 존경을 받았다.",
+    violaScore: 4,
+    style: "유머와 깜짝 놀라게 하는 장치가 특기. 교향곡과 현악4중주의 기본 틀을 만들어낸 창시자. 형식 안에서 장난치는 걸 좋아함. '놀람' 교향곡에서 졸고 있는 관객을 깨우려고 갑자기 쾅!",
+    personality: "붙임성 좋고 유머 감각 넘치는 동네 아저씨. 모든 사람에게 호감을 줌. 요즘이면 회사에서 다들 좋아하는 팀장님. 후배(모차르트, 베토벤)를 진심으로 응원하고 챙기는 따뜻한 멘토.",
+    works: { "교향곡": 104, "현악4중주": 68, "오페라": 13, "협주곡": 20, "오라토리오": 2 },
+    famous: [
+      { t: "교향곡 94번 '놀람'", g: "교향곡", q: "Haydn Symphony 94 Surprise" },
+      { t: "현악4중주 Op.76-3 '황제'", g: "현악4중주", q: "Haydn String Quartet Emperor Op.76 No.3", quartet: true },
+      { t: "현악4중주 Op.76-2 '5도'", g: "현악4중주", q: "Haydn String Quartet Op.76 No.2 Fifths", quartet: true },
+      { t: "트럼펫 협주곡 Eb장조", g: "협주곡", q: "Haydn Trumpet Concerto" },
+      { t: "천지창조", g: "오라토리오", q: "Haydn The Creation oratorio" },
+    ],
+    violaNote: "'현악 4중주의 아버지'. 68곡의 현4를 작곡하며 장르를 확립. 모든 현4에 비올라 파트가 중요한 역할."
+  },
+  {
+    id: "mozart", name: "모차르트", original: "W.A. Mozart",
+    nation: "오스트리아", birth: 1756, death: 1791, era: "고전주의",
+    deathAge: 35, deathCause: "원인 미상 (열병)",
+    deathStory: "35세에 갑작스러운 고열과 부종으로 사망. 독살설, 류마티스열 등 200년 넘게 사인 논쟁 중. 빈민 공동묘지에 묻혀 정확한 무덤 위치도 모름.",
+    violaScore: 5,
+    style: "천재적 자연스러움. 힘들여 쓴 티가 안 남. 멜로디가 노래하듯 흐르고, 밝은 표면 아래 슬픔이 숨어있음. 오페라에서 인간 심리 묘사가 놀라울 정도로 정확.",
+    personality: "장난기 넘치는 개구쟁이 천재. 편지에 똥 이야기를 자주 씀(진짜!). 요즘이면 엄청난 재능을 가졌지만 SNS에 밈을 올리고, 돈 관리를 못 해서 항상 빈털터리인 아티스트. 사람을 즐겁게 하는 걸 사랑하는 ENFP.",
+    works: { "교향곡": 41, "피아노협주곡": 27, "오페라": 22, "현악4중주": 23, "현악5중주": 6, "세레나데": 13 },
+    famous: [
+      { t: "신포니아 콘체르탄테 K.364 (비올라 협주곡!)", g: "협주곡", q: "Mozart Sinfonia Concertante K.364 viola" },
+      { t: "현악5중주 K.515 C장조 (비올라 2대)", g: "현악5중주", q: "Mozart String Quintet K.515", quartet: true },
+      { t: "교향곡 40번 g단조", g: "교향곡", q: "Mozart Symphony No.40" },
+      { t: "레퀴엠 K.626", g: "종교곡", q: "Mozart Requiem K.626" },
+      { t: "피가로의 결혼", g: "오페라", q: "Mozart Marriage of Figaro overture" },
+      { t: "아이네 클라이네 나흐트무지크", g: "세레나데", q: "Mozart Eine kleine Nachtmusik" },
+    ],
+    violaNote: "모차르트 본인이 비올라 연주자였다! 현악 앙상블에서 비올라를 즐겨 연주. 신포니아 콘체르탄테 K.364는 사실상 비올라 협주곡의 최고봉."
+  },
+  {
+    id: "beethoven", name: "베토벤", original: "L.v. Beethoven",
+    nation: "독일", birth: 1770, death: 1827, era: "고전주의",
+    deathAge: 56, deathCause: "간경화·폐렴",
+    deathStory: "28세부터 청력 악화, 말년에는 완전히 들리지 않는 상태에서 교향곡 9번 등을 작곡. 폭풍우 치는 날, '친구여, 박수를 — 희극은 끝났다'는 말을 남기고 사망했다는 전설.",
+    violaScore: 4,
+    style: "극적인 대비와 폭발적 에너지. 운명과 투쟁하는 듯한 드라마. 초기엔 모차르트·하이든을 따랐지만 점점 규칙을 깨고 감정을 폭발시킴. 후기엔 시대를 100년 앞선 실험적 작품.",
+    personality: "불같은 성격의 고집쟁이. 귀족 앞에서도 고개 안 숙이는 자존심. 요즘이면 천재적 능력으로 인정받지만 성격 때문에 팀워크가 어려운 사람. 불의에 분노하고 약자에게 따뜻한 INTJ. 방은 항상 엉망.",
+    works: { "교향곡": 9, "피아노협주곡": 5, "바이올린협주곡": 1, "현악4중주": 16, "피아노소나타": 32 },
+    famous: [
+      { t: "교향곡 5번 '운명'", g: "교향곡", q: "Beethoven Symphony No.5" },
+      { t: "교향곡 9번 '합창'", g: "교향곡", q: "Beethoven Symphony No.9 Choral" },
+      { t: "현악4중주 Op.131 c#단조 (후기)", g: "현악4중주", q: "Beethoven String Quartet Op.131", quartet: true },
+      { t: "현악4중주 Op.59-1 '라주모프스키'", g: "현악4중주", q: "Beethoven String Quartet Razumovsky Op.59", quartet: true },
+      { t: "피아노 소나타 14번 '월광'", g: "소나타", q: "Beethoven Moonlight Sonata" },
+      { t: "바이올린 협주곡 D장조", g: "협주곡", q: "Beethoven Violin Concerto" },
+    ],
+    violaNote: "후기 현악4중주(Op.127~135)는 음악사상 가장 깊고 심오한 실내악. 비올라 파트가 단순 반주가 아닌 독립적 목소리로 활약."
+  },
+  {
+    id: "schubert", name: "슈베르트", original: "Franz Schubert",
+    nation: "오스트리아", birth: 1797, death: 1828, era: "낭만주의",
+    deathAge: 31, deathCause: "장티푸스",
+    deathStory: "매독 감염으로 약해진 몸에 장티푸스 감염. 31세에 요절. 600곡이 넘는 가곡을 남겼지만 생전에 제대로 인정받지 못했다. 유언으로 '베토벤 옆에 묻어달라'고 했고, 소원이 이루어졌다.",
+    violaScore: 3,
+    style: "끝없이 아름다운 멜로디의 샘. 시(詩)를 음악으로 변환하는 마법. 밝은 장조에서 갑자기 어두운 단조로 바뀌는 순간이 소름끼침. 가곡 600곡 이상 — 멜로디 메이커의 끝판왕.",
+    personality: "수줍고 내향적이지만 친구들 사이에서는 따뜻한 사람. 키 152cm의 작은 체구, 안경 쓴 외모. 요즘이면 카페에서 혼자 조용히 글 쓰고 있는 감성적인 작가. 친한 친구들과의 소모임(슈베르티아데)을 사랑하는 INFP.",
+    works: { "교향곡": 8, "가곡": 600, "현악4중주": 15, "피아노소나타": 21, "실내악": 20 },
+    famous: [
+      { t: "현악4중주 14번 '죽음과 소녀'", g: "현악4중주", q: "Schubert Death and the Maiden Quartet", quartet: true },
+      { t: "교향곡 8번 '미완성'", g: "교향곡", q: "Schubert Symphony Unfinished" },
+      { t: "가곡 '마왕' (Erlkönig)", g: "가곡", q: "Schubert Erlkonig" },
+      { t: "피아노5중주 '송어'", g: "실내악", q: "Schubert Trout Quintet" },
+      { t: "아르페지오네 소나타 (비올라로도 연주)", g: "소나타", q: "Schubert Arpeggione Sonata viola" },
+    ],
+    violaNote: "'죽음과 소녀' 현4는 비올라의 중요한 레퍼토리. 아르페지오네 소나타는 원래 아르페지오네(사라진 악기)용이지만 현재 비올라로 가장 많이 연주."
+  },
+  {
+    id: "mendelssohn", name: "멘델스존", original: "Felix Mendelssohn",
+    nation: "독일", birth: 1809, death: 1847, era: "낭만주의",
+    deathAge: 38, deathCause: "뇌졸중",
+    deathStory: "사랑하는 누나 파니가 먼저 세상을 떠나자 큰 충격을 받아 건강이 급격히 악화. 6개월 후 연이은 뇌졸중으로 38세에 사망.",
+    violaScore: 3,
+    style: "우아하고 세련된 낭만주의. 바흐의 대위법 + 낭만적 감성의 완벽한 융합. 밝고 빛나는 선율, 요정처럼 가벼운 스케르초. 16세에 현악8중주, 17세에 한여름 밤의 꿈 서곡을 쓴 천재.",
+    personality: "부유한 은행가 집안 출신의 엘리트. 그림도 잘 그리고, 수영도 잘하고, 외국어도 여러 개. 요즘이면 명문대 출신에 운동도 잘하는 만능 엄친아. 누나 파니와 매우 가까운 가족 중심 성격.",
+    works: { "교향곡": 5, "협주곡": 3, "현악4중주": 7, "서곡": 5, "오라토리오": 2 },
+    famous: [
+      { t: "바이올린 협주곡 e단조", g: "협주곡", q: "Mendelssohn Violin Concerto e minor" },
+      { t: "현악8중주 Op.20", g: "실내악", q: "Mendelssohn String Octet Op.20" },
+      { t: "교향곡 4번 '이탈리아'", g: "교향곡", q: "Mendelssohn Symphony Italian" },
+      { t: "한여름 밤의 꿈 서곡", g: "서곡", q: "Mendelssohn Midsummer Night Dream" },
+      { t: "현악4중주 Op.44-1", g: "현악4중주", q: "Mendelssohn String Quartet Op.44 No.1", quartet: true },
+    ],
+    violaNote: "현악8중주 Op.20은 16세 때 작곡한 천재적 작품. 비올라 2대가 들어가며 비올라 파트가 매우 화려."
+  },
+  {
+    id: "schumann", name: "슈만", original: "Robert Schumann",
+    nation: "독일", birth: 1810, death: 1856, era: "낭만주의",
+    deathAge: 46, deathCause: "정신질환",
+    deathStory: "오랜 정신질환에 시달리다 라인강에 투신 자살 시도. 구조된 후 본 근처 정신병원에 수용, 2년 후 사망. 아내 클라라는 면회도 허락받지 못했다.",
+    violaScore: 4,
+    style: "문학적이고 환상적. 음악에 이야기와 캐릭터를 넣음. 자기 안의 두 인격(열정적 '플로레스탄'과 몽상적 '오이제비우스')이 번갈아 등장. 피아노곡에서 특히 시적이고 내밀한 세계.",
+    personality: "예민하고 감성적인 낭만주의자. 음악평론도 했던 지식인. 요즘이면 블로그에 깊은 글을 쓰는 문학청년. 아내 클라라(당대 최고 피아니스트)를 향한 사랑이 열렬. 감정 기복이 심한 예술가 기질.",
+    works: { "교향곡": 4, "협주곡": 3, "가곡": 250, "피아노곡": 100, "실내악": 15 },
+    famous: [
+      { t: "동화 그림 Op.113 (비올라+피아노)", g: "실내악", q: "Schumann Marchenbilder Op.113 viola" },
+      { t: "피아노 협주곡 a단조", g: "협주곡", q: "Schumann Piano Concerto" },
+      { t: "교향곡 3번 '라인'", g: "교향곡", q: "Schumann Symphony No.3 Rhenish" },
+      { t: "시인의 사랑 (Dichterliebe)", g: "가곡", q: "Schumann Dichterliebe" },
+      { t: "피아노5중주 Eb장조 Op.44", g: "실내악", q: "Schumann Piano Quintet Op.44" },
+    ],
+    violaNote: "동화 그림(Märchenbilder) Op.113은 비올라+피아노를 위한 4곡 모음. 동화 이야기(Märchenerzählungen) Op.132도 비올라가 포함."
+  },
+  {
+    id: "brahms", name: "브람스", original: "Johannes Brahms",
+    nation: "독일", birth: 1833, death: 1897, era: "낭만주의",
+    deathAge: 63, deathCause: "간암",
+    deathStory: "평생 독신으로 살며 클라라 슈만을 그리워했다. 클라라 사망 11개월 후, 간암으로 빈에서 사망.",
+    violaScore: 5,
+    style: "고전적 형식에 낭만적 감성을 담음. 화려하지 않지만 깊고 묵직. 베토벤의 후계자로 불림. 교향곡 1번을 쓰기까지 20년을 고민한 완벽주의. 가을 낙엽 같은 쓸쓸한 아름다움.",
+    personality: "겉은 무뚝뚝하고 말이 거칠지만 속은 여린 츤데레. 평생 스승의 아내 클라라를 짝사랑. 요즘이면 자기 감정 표현이 서툴러서 오해받는 타입. 돈을 몰래 후배에게 보내주는 숨은 다정함. 수염 덥수룩한 고독한 독신남.",
+    works: { "교향곡": 4, "협주곡": 4, "현악4중주": 3, "현악5중주": 2, "현악6중주": 2, "가곡": 200 },
+    famous: [
+      { t: "비올라 소나타 Op.120-1 f단조", g: "소나타", q: "Brahms Viola Sonata Op.120 No.1" },
+      { t: "비올라 소나타 Op.120-2 Eb장조", g: "소나타", q: "Brahms Viola Sonata Op.120 No.2" },
+      { t: "교향곡 1번 c단조", g: "교향곡", q: "Brahms Symphony No.1" },
+      { t: "현악6중주 1번 Op.18 (비올라 2대)", g: "실내악", q: "Brahms String Sextet No.1 Op.18" },
+      { t: "현악5중주 2번 Op.111", g: "실내악", q: "Brahms String Quintet No.2 Op.111", quartet: true },
+      { t: "헝가리 무곡 5번", g: "관현악", q: "Brahms Hungarian Dance No.5" },
+    ],
+    violaNote: "비올라 소나타 Op.120 두 곡은 '비올라의 성경'! 원래 클라리넷용이지만 브람스가 직접 비올라 판도 만듦. 비올라 연주자의 필수 레퍼토리."
+  },
+  {
+    id: "tchaikovsky", name: "차이콥스키", original: "P.I. Tchaikovsky",
+    nation: "러시아", birth: 1840, death: 1893, era: "낭만주의",
+    deathAge: 53, deathCause: "콜레라 (자살설)",
+    deathStory: "교향곡 6번 '비창' 초연 9일 후 사망. 공식 사인은 콜레라이나, 명예를 지키기 위한 자살이었다는 설이 유력. '비창'이 유서였을 수도.",
+    violaScore: 3,
+    style: "감정의 물결이 밀려오는 듯한 멜로디. 달콤하면서도 비극적. 발레 음악을 예술의 경지로 끌어올림. 러시아적 서정성 + 서유럽의 세련된 기법. 듣는 사람을 울게 만드는 능력자.",
+    personality: "극도로 예민하고 불안한 사람. 동성애를 숨기며 살았던 고뇌. 요즘이면 겉으론 완벽해 보이지만 속으로 힘들어하는 타입. 편지를 엄청 많이 쓰고, 후원자(폰 메크 부인)와 편지로만 14년간 교류. 만남을 두려워하는 사회불안.",
+    works: { "교향곡": 6, "발레": 3, "오페라": 10, "협주곡": 3, "실내악": 4 },
+    famous: [
+      { t: "교향곡 6번 '비창'", g: "교향곡", q: "Tchaikovsky Symphony No.6 Pathetique" },
+      { t: "현악6중주 '피렌체의 추억' (비올라 2대)", g: "실내악", q: "Tchaikovsky Souvenir de Florence" },
+      { t: "호두까기 인형", g: "발레", q: "Tchaikovsky Nutcracker Suite" },
+      { t: "백조의 호수", g: "발레", q: "Tchaikovsky Swan Lake" },
+      { t: "피아노 협주곡 1번", g: "협주곡", q: "Tchaikovsky Piano Concerto No.1" },
+    ],
+    violaNote: "현악6중주 '피렌체의 추억'에서 비올라 2대가 풍부한 중음역을 담당. 교향곡에서도 비올라 섹션에 아름다운 멜로디를 많이 줌."
+  },
+  {
+    id: "dvorak", name: "드보르자크", original: "Antonín Dvořák",
+    nation: "체코", birth: 1841, death: 1904, era: "낭만주의",
+    deathAge: 62, deathCause: "뇌졸중",
+    deathStory: "프라하에서 갑작스러운 뇌졸중으로 사망. 체코 국민 영웅으로 성대한 국장이 치러졌다.",
+    violaScore: 3,
+    style: "민속 음악의 리듬과 선율을 클래식에 녹임. 고향(체코 보헤미아)의 자연과 춤곡이 음악에 생생하게 살아있음. 미국에서 흑인영가·인디언 음악도 흡수. 따뜻하고 친근한 멜로디.",
+    personality: "기차와 비둘기를 사랑한 소박한 사람. 뉴욕에 갔을 때도 고향 그리워하며 향수병. 요즘이면 시골에서 텃밭 가꾸며 사는 걸 좋아하는 정 많은 아저씨. 기차 시간표를 외우는 독특한 취미.",
+    works: { "교향곡": 9, "협주곡": 3, "현악4중주": 14, "오페라": 10, "슬라브무곡": 16 },
+    famous: [
+      { t: "교향곡 9번 '신세계로부터'", g: "교향곡", q: "Dvorak Symphony No.9 New World" },
+      { t: "현악4중주 12번 '아메리카'", g: "현악4중주", q: "Dvorak American Quartet", quartet: true },
+      { t: "첼로 협주곡 b단조", g: "협주곡", q: "Dvorak Cello Concerto" },
+      { t: "현악5중주 Op.97 Eb장조", g: "실내악", q: "Dvorak String Quintet Op.97", quartet: true },
+      { t: "슬라브 무곡", g: "관현악", q: "Dvorak Slavonic Dances" },
+    ],
+    violaNote: "'아메리카' 현4의 비올라 파트는 아름다운 선율이 가득. 현악5중주 Op.97도 비올라가 2대 들어가는 편성."
+  },
+  {
+    id: "mahler", name: "말러", original: "Gustav Mahler",
+    nation: "오스트리아", birth: 1860, death: 1911, era: "후기낭만",
+    deathAge: 50, deathCause: "심내막염",
+    deathStory: "빈 필하모닉 지휘자로 과로하며 심장이 약해짐. 아내 알마의 불륜, 딸의 죽음 등 개인적 비극 속에서 50세에 사망.",
+    violaScore: 3,
+    style: "거대한 편성(100명+ 오케스트라)으로 우주적 스케일. 삶과 죽음, 자연과 영혼을 음악에 담으려 함. 민요·군악대·새소리가 뒤섞이는 콜라주 기법. 한 교향곡이 80분 넘기도.",
+    personality: "강박적 완벽주의 지휘자. '전통은 재의 숭배가 아니라 불꽃의 전승'이란 명언. 요즘이면 워커홀릭에 번아웃 오는 CEO 타입. 늘 불안하고, 프로이트에게 상담 받기도 했음. 자기 음악이 사후에야 인정받을 걸 예견.",
+    works: { "교향곡": 9, "가곡교향곡": 1, "가곡집": 5 },
+    famous: [
+      { t: "교향곡 5번 (아다지에토)", g: "교향곡", q: "Mahler Symphony No.5 Adagietto" },
+      { t: "교향곡 2번 '부활'", g: "교향곡", q: "Mahler Symphony No.2 Resurrection" },
+      { t: "대지의 노래", g: "가곡교향곡", q: "Mahler Das Lied von der Erde" },
+      { t: "교향곡 9번", g: "교향곡", q: "Mahler Symphony No.9" },
+    ],
+    violaNote: "교향곡에서 비올라 섹션에 핵심적인 선율을 많이 부여. 특히 교향곡 10번(미완성)의 비올라 독주가 유명."
+  },
+  {
+    id: "debussy", name: "드뷔시", original: "Claude Debussy",
+    nation: "프랑스", birth: 1862, death: 1918, era: "인상주의",
+    deathAge: 55, deathCause: "대장암",
+    deathStory: "1차 세계대전 중 파리에서 대장암으로 투병. 독일군의 포격이 울리는 가운데 조용히 사망. 전시라 장례도 간소하게 치러졌다.",
+    violaScore: 2,
+    style: "인상주의 — 그림의 인상파(모네)처럼 윤곽보다 분위기·빛·색채를 그림. 기존 화성 규칙을 과감히 깨뜨림. 물, 바람, 달빛을 음악으로 그리는 느낌. 동양 음악(일본 가믈란)에서도 영감을 받음.",
+    personality: "까다롭고 독립적인 미식가. 예술적 취향이 확고하고 타협을 모름. 요즘이면 감각적인 인스타 피드를 가진 예술가. 사생활이 복잡(여러 연인). '인상주의'라 불리는 걸 싫어했지만 결국 그 이름이 붙음.",
+    works: { "관현악곡": 10, "피아노곡": 50, "오페라": 1, "현악4중주": 1, "실내악": 5 },
+    famous: [
+      { t: "현악4중주 g단조", g: "현악4중주", q: "Debussy String Quartet G minor", quartet: true },
+      { t: "목신의 오후 전주곡", g: "관현악", q: "Debussy Prelude afternoon faun" },
+      { t: "달빛 (Clair de lune)", g: "피아노곡", q: "Debussy Clair de Lune" },
+      { t: "바다 (La Mer)", g: "관현악", q: "Debussy La Mer" },
+    ],
+    violaNote: "현악4중주 g단조는 프랑스 실내악의 걸작. 비올라가 인상주의적 색채를 풍부하게 표현."
+  },
+  {
+    id: "ravel", name: "라벨", original: "Maurice Ravel",
+    nation: "프랑스", birth: 1875, death: 1937, era: "인상주의",
+    deathAge: 62, deathCause: "뇌수술 후 합병증",
+    deathStory: "전두엽 위축으로 점점 작곡 능력을 상실. 뇌수술을 시도했으나 혼수상태에 빠져 깨어나지 못했다. 음악적 천재성이 서서히 꺼져가는 비극.",
+    violaScore: 2,
+    style: "'스위스 시계공'이라 불릴 만큼 정교한 오케스트레이션. 드뷔시보다 더 명확하고 정밀. 볼레로처럼 하나의 아이디어를 끝까지 밀어붙이는 집요함. 화려한 색채감과 재즈 영향도.",
+    personality: "키 160cm 작은 체구에 항상 말끔한 정장. 디테일에 집착하는 완벽주의자. 요즘이면 미니멀한 인테리어에 사는 깔끔쟁이. 사교적이지만 속마음을 잘 안 보여주는 미스터리한 사람. 고양이와 장난감 컬렉션을 좋아함.",
+    works: { "관현악곡": 10, "피아노곡": 30, "현악4중주": 1, "오페라": 2, "발레": 2 },
+    famous: [
+      { t: "현악4중주 F장조", g: "현악4중주", q: "Ravel String Quartet F major", quartet: true },
+      { t: "볼레로", g: "관현악", q: "Ravel Bolero" },
+      { t: "피아노 협주곡 G장조", g: "협주곡", q: "Ravel Piano Concerto G major" },
+      { t: "다프니스와 클로에", g: "발레", q: "Ravel Daphnis et Chloe" },
+    ],
+    violaNote: "현악4중주 F장조의 비올라 파트가 아름답기로 유명. 드뷔시의 현4와 쌍벽을 이루는 프랑스 실내악 명작."
+  },
+  {
+    id: "bartok", name: "바르톡", original: "Béla Bartók",
+    nation: "헝가리", birth: 1881, death: 1945, era: "현대",
+    deathAge: 64, deathCause: "백혈병",
+    deathStory: "나치를 피해 미국으로 망명했지만 가난과 병에 시달림. 비올라 협주곡을 쓰다 미완성으로 남기고 뉴욕에서 사망. 제자 셜리가 완성.",
+    violaScore: 5,
+    style: "헝가리·루마니아 민속음악을 현대적으로 변형. 타악기적 리듬, 날카로운 불협화음, 야생적 에너지. 민속음악 수집가로 시골을 돌아다니며 축음기로 녹음. 현악4중주에서 악기의 한계를 밀어붙임.",
+    personality: "과묵하고 원칙적인 학자 타입. 파시즘에 단호히 반대하며 조국을 떠남. 요즘이면 소신 있게 행동하는 연구자. 자연과 민속문화를 사랑하고, 곤충 채집이 취미. 가난해도 타협하지 않는 강한 자존심.",
+    works: { "현악4중주": 6, "협주곡": 5, "오페라": 1, "발레": 2, "피아노곡": 100 },
+    famous: [
+      { t: "비올라 협주곡 (미완성→셜리 완성)", g: "협주곡", q: "Bartok Viola Concerto" },
+      { t: "현악4중주 4번", g: "현악4중주", q: "Bartok String Quartet No.4", quartet: true },
+      { t: "관현악을 위한 협주곡", g: "관현악", q: "Bartok Concerto for Orchestra" },
+      { t: "현악4중주 전 6곡", g: "현악4중주", q: "Bartok String Quartets complete", quartet: true },
+      { t: "미크로코스모스", g: "피아노곡", q: "Bartok Mikrokosmos" },
+    ],
+    violaNote: "비올라 협주곡을 작곡하다 세상을 떠남! 미완성이지만 비올라의 가장 중요한 현대 레퍼토리. 현악4중주 6곡도 20세기 최고의 실내악."
+  },
+  {
+    id: "prokofiev", name: "프로코피예프", original: "Sergei Prokofiev",
+    nation: "러시아", birth: 1891, death: 1953, era: "현대",
+    deathAge: 61, deathCause: "뇌출혈",
+    deathStory: "스탈린과 같은 날(3월 5일) 사망. 독재자의 죽음에 온 나라가 애도하느라 프로코피예프의 장례는 관심조차 받지 못했다.",
+    violaScore: 2,
+    style: "장난스럽고 날카로운 선율. 전통적 형식을 유지하면서 현대적 화성으로 비틈. 풍자적이고 유머러스. 발레 음악에서 스토리텔링이 탁월. 피아노를 타악기처럼 두드리는 강렬한 터치.",
+    personality: "자신감 넘치고 경쟁심 강한 사람. 체스를 잘 두고 승부욕이 강함. 요즘이면 실력으로 승부하는 독설가. 소련 체제 아래서도 자기 스타일을 지키려 애쓴 고집.",
+    works: { "교향곡": 7, "협주곡": 7, "발레": 7, "오페라": 8, "피아노소나타": 9 },
+    famous: [
+      { t: "로미오와 줄리엣 발레 모음곡", g: "발레", q: "Prokofiev Romeo and Juliet ballet" },
+      { t: "피터와 늑대", g: "관현악", q: "Prokofiev Peter and the Wolf" },
+      { t: "교향곡 1번 '고전'", g: "교향곡", q: "Prokofiev Symphony No.1 Classical" },
+      { t: "피아노 협주곡 3번", g: "협주곡", q: "Prokofiev Piano Concerto No.3" },
+    ],
+    violaNote: "'로미오와 줄리엣'에서 비올라 솔로가 아름다운 장면을 연주. 교향곡에서도 비올라에 인상적인 선율 부여."
+  },
+  {
+    id: "hindemith", name: "힌데미트", original: "Paul Hindemith",
+    nation: "독일", birth: 1895, death: 1963, era: "현대",
+    deathAge: 68, deathCause: "뇌졸중",
+    deathStory: "프랑크푸르트에서 뇌졸중으로 사망. 나치 시대에 '퇴폐 음악'으로 낙인찍혀 미국으로 망명했다가 귀국.",
+    violaScore: 5,
+    style: "실용적이고 장인적. '음악은 쓸모가 있어야 한다(Gebrauchsmusik)'. 모든 악기를 위한 소나타를 쓰겠다는 목표. 대위법과 조성의 새로운 체계를 만듦. 비올라의 표현 가능성을 극한까지 탐구.",
+    personality: "본인이 비올라 거장이자 작곡가. 실용적이고 부지런한 장인 기질. 요즘이면 이론도 알고 실기도 하는 만능 교수님. 교육에도 열정적이고, 예일대에서 가르침. 나치에 맞선 용기 있는 지식인.",
+    works: { "교향곡": 4, "오페라": 7, "소나타": 25, "협주곡": 10, "실내악": 30 },
+    famous: [
+      { t: "백조를 구운 남자 (비올라 협주곡)", g: "협주곡", q: "Hindemith Der Schwanendreher viola" },
+      { t: "비올라 소나타 Op.25-1", g: "소나타", q: "Hindemith Viola Sonata Op.25 No.1" },
+      { t: "무반주 비올라 소나타 Op.25-1", g: "독주곡", q: "Hindemith Solo Viola Sonata Op.25" },
+      { t: "화가 마티스 교향곡", g: "교향곡", q: "Hindemith Mathis der Maler Symphony" },
+      { t: "비올라 소나타 Op.11-4", g: "소나타", q: "Hindemith Viola Sonata Op.11 No.4" },
+    ],
+    violaNote: "힌데미트 본인이 전설적인 비올라 연주자! 비올라를 위한 곡을 가장 많이 쓴 작곡가. '백조를 구운 남자'는 비올라 협주곡의 대명사."
+  },
+  {
+    id: "shostakovich", name: "쇼스타코비치", original: "D. Shostakovich",
+    nation: "러시아", birth: 1906, death: 1975, era: "현대",
+    deathAge: 68, deathCause: "폐암·심장질환",
+    deathStory: "스탈린 체제에서 예술적 자유를 억압당하며 공포 속에 작곡. 인생 마지막 작품으로 비올라 소나타를 완성하고 한 달 후 사망.",
+    violaScore: 5,
+    style: "겉으로는 체제에 순응하는 듯하지만 음악 속에 풍자와 저항을 숨김. 행진곡이 갑자기 공허해지거나, 밝은 듯 보이지만 비꼬는 이중성. 현악4중주에서 가장 솔직한 내면을 드러냄.",
+    personality: "신경질적으로 예민하지만 겉으로는 조용한 사람. 스탈린의 공포 아래 '오늘 밤 체포될 수도' 있다는 두려움 속에 살았음. 요즘이면 회사의 부당함을 알지만 가족을 위해 참는 직장인. 문 앞에 짐 싸놓고 잠들었다는 일화.",
+    works: { "교향곡": 15, "현악4중주": 15, "협주곡": 6, "오페라": 2, "영화음악": 36 },
+    famous: [
+      { t: "비올라 소나타 Op.147 (인생 마지막 곡!)", g: "소나타", q: "Shostakovich Viola Sonata Op.147" },
+      { t: "현악4중주 8번 c단조", g: "현악4중주", q: "Shostakovich String Quartet No.8", quartet: true },
+      { t: "교향곡 5번 d단조", g: "교향곡", q: "Shostakovich Symphony No.5" },
+      { t: "교향곡 7번 '레닌그라드'", g: "교향곡", q: "Shostakovich Symphony No.7 Leningrad" },
+      { t: "현악4중주 15번", g: "현악4중주", q: "Shostakovich String Quartet No.15", quartet: true },
+    ],
+    violaNote: "비올라 소나타 Op.147은 인생의 마지막 작품! 죽음 직전에 완성한 이 곡은 비올라 문헌의 최고 걸작 중 하나. 현악4중주 15곡도 모두 비올라의 중요 레퍼토리."
+  },
+];
+
+const QUARTET_ESSENTIALS = [
+  { composer: "하이든", title: "현악4중주 Op.76-3 '황제'", desc: "현4의 아버지가 쓴 대표작. 독일 국가 선율을 변주 — 하나의 멜로디가 4명 사이를 릴레이하듯 돌아다님!", q: "Haydn Emperor Quartet" },
+  { composer: "모차르트", title: "현악4중주 K.421 d단조", desc: "모차르트가 하이든에게 바친 6곡 중 가장 극적. 아내가 진통 중일 때 작곡했다는 전설!", q: "Mozart String Quartet K.421" },
+  { composer: "베토벤", title: "현악4중주 Op.59-1 '라주모프스키'", desc: "4명이 연주하는데 교향곡처럼 웅장. 현4의 규모를 확 키운 게임체인저", q: "Beethoven Razumovsky Quartet No.1" },
+  { composer: "베토벤", title: "현악4중주 Op.131 c#단조", desc: "후기 최고 걸작. 7개 장면이 영화처럼 쉼 없이 이어짐. 슈베르트가 '이 뒤에 뭘 더 쓸 수 있겠나'라고 탄식", q: "Beethoven String Quartet Op.131" },
+  { composer: "슈베르트", title: "현악4중주 14번 '죽음과 소녀'", desc: "죽음이 소녀를 부르는 가곡을 변주. 서늘한 아름다움에 소름이 돋는 2악장!", q: "Schubert Death and the Maiden" },
+  { composer: "멘델스존", title: "현악4중주 Op.44-1 D장조", desc: "청년 천재의 넘치는 에너지. 밝고 화려해서 콘서트 오프닝으로 딱!", q: "Mendelssohn String Quartet Op.44 No.1" },
+  { composer: "브람스", title: "현악4중주 Op.51-1 c단조", desc: "완벽주의자가 20년을 고민한 첫 현4. '이전 작품 20곡을 버렸다'는 일화. 묵직하고 깊음", q: "Brahms String Quartet Op.51 No.1" },
+  { composer: "드보르자크", title: "현악4중주 12번 '아메리카'", desc: "미국 시골에서 향수에 젖어 작곡. 귀에 착착 감기는 멜로디의 보물 상자!", q: "Dvorak American Quartet" },
+  { composer: "드뷔시", title: "현악4중주 g단조", desc: "수채화 같은 음악. 뚜렷한 멜로디 대신 빛과 색깔이 흐르는 듯한 새로운 세계!", q: "Debussy String Quartet" },
+  { composer: "라벨", title: "현악4중주 F장조", desc: "드뷔시의 색채 + 스위스 시계 같은 정밀함. 아름답지만 한 치의 오차도 없는 완벽한 구조", q: "Ravel String Quartet" },
+  { composer: "바르톡", title: "현악4중주 4번", desc: "20세기 현4의 최고봉. 4개 악기를 타악기처럼 두드리기도! 듣기 전과 후가 다른 충격적 경험", q: "Bartok String Quartet No.4" },
+  { composer: "쇼스타코비치", title: "현악4중주 8번 c단조", desc: "자기 이름(DSCH)을 음표로 새긴 음악 일기. 전쟁·공포·슬픔이 담긴 가장 개인적인 고백", q: "Shostakovich String Quartet No.8" },
+];
+
+// ===================================================================
+// RENDERING
+// ===================================================================
+
+function renderChamberTree() {
+  document.getElementById('chamberTree').innerHTML = `
+    <h3 style="color:var(--gold);margin-bottom:4px;">음악의 큰 그림 — 실내악은 어디에 있는가?</h3>
+    <p style="font-size:0.82rem;color:var(--text3);margin-bottom:16px;">클래식 음악의 분류 구조. 현악 4중주가 어디에 위치하는지 한눈에!</p>
+    <div class="chamber-tree">
+      <div class="tree-node root">클래식 음악 (서양 예술 음악 전체)</div>
+      <div class="tree-connector">
+
+        <div class="tree-node branch">관현악 (Orchestra) — 대규모 (50~100명)
+          <div class="tree-desc">지휘자가 이끄는 대편성. 콘서트홀에서 연주</div>
+        </div>
+        <div class="tree-connector" style="margin-left:30px;">
+          <div class="tree-node branch">교향곡 (Symphony) <span class="tree-desc">오케스트라만</span></div>
+          <div class="tree-node branch">협주곡 (Concerto) <span class="tree-desc">독주자 + 오케스트라</span></div>
+          <div class="tree-node branch">서곡, 교향시 등</div>
+        </div>
+
+        <div class="tree-node branch">오페라·성악 — 노래 중심
+          <div class="tree-desc">성악가 + 오케스트라 + 무대</div>
+        </div>
+        <div class="tree-connector" style="margin-left:30px;">
+          <div class="tree-node branch">오페라 (Opera) <span class="tree-desc">노래극</span></div>
+          <div class="tree-node branch">가곡 (Lied) <span class="tree-desc">성악+피아노</span></div>
+          <div class="tree-node branch">오라토리오, 레퀴엠 등</div>
+        </div>
+
+        <div class="tree-node root" style="background:rgba(139,92,246,0.12);border-left-color:var(--viola);color:var(--viola);">
+          실내악 (Chamber Music) — 소규모 (2~9명)
+          <div class="tree-desc" style="color:var(--viola);">지휘자 없이 연주자들이 서로 들으며 대화하듯 연주. 가장 친밀한 음악!</div>
+        </div>
+        <div class="tree-connector" style="margin-left:30px;border-left-color:rgba(139,92,246,0.15);">
+
+          <div class="tree-node branch">2명 (Duo)
+            <div class="tree-members">소나타: 독주악기 + 피아노 (예: 비올라 소나타)</div>
+          </div>
+
+          <div class="tree-node branch">3명 (Trio)
+            <div class="tree-members">피아노 3중주: 피아노 + 바이올린 + 첼로<br>현악 3중주: 바이올린 + 비올라 + 첼로</div>
+          </div>
+
+          <div class="tree-node highlight">
+            4명 (Quartet) — 현악 4중주 ← 여기가 바로 당신!
+            <div class="tree-members" style="background:rgba(139,92,246,0.15);">
+              바이올린 1st + 바이올린 2nd + <strong>비올라</strong> + 첼로<br>
+              "실내악의 꽃". 네 악기가 평등하게 대화. 가장 많이 작곡된 실내악 형태
+            </div>
+          </div>
+
+          <div class="tree-node branch">5명 (Quintet)
+            <div class="tree-members">현악 5중주: 현4 + 비올라 or 첼로 추가<br>피아노 5중주: 피아노 + 현4</div>
+          </div>
+
+          <div class="tree-node branch">6명 (Sextet)
+            <div class="tree-members">현악 6중주: 바이올린2 + 비올라2 + 첼로2</div>
+          </div>
+
+          <div class="tree-node branch">7~9명
+            <div class="tree-members">7중주(Septet), 8중주(Octet) 등</div>
+          </div>
+        </div>
+
+        <div class="tree-node branch">독주 (Solo) — 1명
+          <div class="tree-desc">반주 없이 혼자. 예: 바흐 무반주 모음곡</div>
+        </div>
+
+      </div>
+    </div>
+    <div class="basics-analogy" style="margin-top:20px;">
+      <strong>한마디로 정리하면:</strong><br>
+      관현악 = 100명짜리 대형 아이돌 그룹 콘서트<br>
+      실내악 = 4~5명 밴드의 소극장 공연<br>
+      독주 = 버스킹하는 1인 아티스트<br><br>
+      실내악 안에 2중주~8중주가 있고, 그중 <strong>현악 4중주가 실내악의 핵심</strong>이에요.<br>
+      당신이 하는 콰르텟은 클래식 실내악에서 가장 많이 작곡되고 가장 중요한 장르! 밴드로 치면 '4인조 록밴드'가 가장 완벽한 편성인 것처럼, 현악4중주도 '4명이 만드는 가장 완벽한 조합'이에요.
+    </div>
+  `;
+}
+
+function renderBasics() {
+  const grid = document.getElementById('basicsGrid');
+  const order = ['classical', 'keys', 'opus', 'tempo', 'movements', 'expression'];
+  grid.innerHTML = order.map(key => {
+    const b = BASICS[key];
+    return `
+      <div class="basics-block fade-in">
+        <h3><span class="hj">${b.hanja}</span> ${b.title}</h3>
+        ${b.hanjaBreak ? `<div class="sub-explain">${b.hanjaBreak}${b.meaning ? '<br>' + b.meaning : ''}</div>` : ''}
+        ${b.body}
+      </div>
+    `;
+  }).join('');
+}
+
+function renderGenreGuide() {
+  const grid = document.getElementById('genreGrid');
+  grid.innerHTML = GENRES.map(g => `
+    <div class="genre-card fade-in">
+      <div class="hanja">${g.hanja}</div>
+      <div class="meaning">${g.hanjaBreak}<br>${g.meaning}</div>
+      <h3>${g.name}</h3>
+      <div class="original">${g.original}</div>
+      <p>${g.desc}</p>
+      <div class="example">${g.example}</div>
+    </div>
+  `).join('');
+
+  const box = document.getElementById('ensembleBox');
+  box.innerHTML = `
+    <h3>편성(앙상블) 종류 — 콰르텟 연주자가 꼭 알아야 할 것</h3>
+    <div class="ensemble-list">
+      ${ENSEMBLES.map(e => `
+        <div class="ensemble-item">
+          <strong>${e.name}</strong>
+          <span>${e.members}</span>
+          <span style="color:var(--text3);margin-top:4px;">${e.note}</span>
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderEraTimeline() {
+  const container = document.getElementById('eraTimeline');
+  const totalSpan = 400; // 1600-2000
+  const startYear = 1600;
+
+  const blocks = ERA_DEFS.map(e => {
+    const widthPct = ((e.end - e.start) / totalSpan) * 100;
+    return `<div class="era-block" style="width:${widthPct}%;background:${e.color};"
+      onclick="filterByEra('${e.name}')">
+      ${e.name}
+      <small>${e.start}–${e.end}</small>
+      <span class="char">${e.char}</span>
+    </div>`;
+  }).join('');
+
+  const years = [];
+  for (let y = 1600; y <= 2000; y += 50) years.push(y);
+  const labels = years.map(y => {
+    const pct = ((y - startYear) / totalSpan) * 100;
+    return `<span style="position:absolute;left:${pct}%;">${y}</span>`;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="era-bar-container">${blocks}</div>
+    <div style="position:relative;min-width:800px;height:20px;margin-top:8px;">
+      ${labels}
+    </div>
+  `;
+}
+
+function renderDeathChart() {
+  const chart = document.getElementById('deathChart');
+  const sorted = [...COMPOSERS].sort((a, b) => a.deathAge - b.deathAge);
+  const maxAge = 80;
+
+  chart.innerHTML = sorted.map(c => {
+    const pct = (c.deathAge / maxAge) * 100;
+    const eraColor = getEraColor(c.era);
+    const youngClass = c.deathAge < 40 ? 'color:var(--era-romantic);font-weight:700;' : '';
+    return `
+      <div class="death-row" onclick="scrollToComposer('${c.id}')">
+        <div class="death-name">${c.name}</div>
+        <div class="death-bar-wrap">
+          <div class="death-bar" style="width:${pct}%;background:${eraColor};">
+            <span style="${youngClass}">${c.deathAge}세</span>
+          </div>
+        </div>
+        <div class="death-cause">${c.birth}–${c.death} | ${c.deathCause}</div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renderLifespanTimeline() {
+  const container = document.getElementById('lifespanTimeline');
+  const startYear = 1670;
+  const endYear = 1980;
+  const span = endYear - startYear;
+
+  // Ruler
+  const rulerMarks = [];
+  for (let y = 1700; y <= 1980; y += 25) {
+    rulerMarks.push(`<span>${y}</span>`);
+  }
+
+  const rows = COMPOSERS.map(c => {
+    const leftPct = ((c.birth - startYear) / span) * 100;
+    const widthPct = ((c.death - c.birth) / span) * 100;
+    const eraColor = getEraColor(c.era);
+    return `
+      <div class="timeline-row" onclick="scrollToComposer('${c.id}')">
+        <div class="timeline-label">${c.name}</div>
+        <div class="timeline-track">
+          <div class="timeline-bar" style="left:${leftPct}%;width:${widthPct}%;background:${eraColor};">
+            ${c.birth}–${c.death}
+            <div class="tip">
+              <strong>${c.name}</strong> (${c.original})<br>
+              ${c.birth}–${c.death} (${c.deathAge}세)<br>
+              ${c.nation} | ${c.era}<br>
+              사인: ${c.deathCause}
+            </div>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  container.innerHTML = `
+    <div class="timeline-ruler">${rulerMarks.join('')}</div>
+    <div class="timeline-rows">${rows}</div>
+  `;
+}
+
+function renderComposerSections() {
+  const sections = document.getElementById('composerSections');
+  const eraOrder = ["바로크", "고전주의", "낭만주의", "후기낭만", "인상주의", "현대"];
+  const grouped = {};
+  COMPOSERS.forEach(c => {
+    if (!grouped[c.era]) grouped[c.era] = [];
+    grouped[c.era].push(c);
+  });
+
+  let html = '';
+  eraOrder.forEach(era => {
+    const comps = grouped[era];
+    if (!comps) return;
+    const eraColor = getEraColor(era);
+    html += `
+      <div class="era-section" data-era="${era}">
+        <div class="era-section-title" style="background:${eraColor}22;border:1px solid ${eraColor}44;">
+          <span class="era-dot" style="background:${eraColor};"></span>
+          ${era} 시대
+        </div>
+        ${comps.map(c => renderComposerCard(c, eraColor)).join('')}
+      </div>
+    `;
+  });
+  sections.innerHTML = html;
+}
+
+function renderComposerCard(c, eraColor) {
+  const violaStars = '&#9834;'.repeat(c.violaScore);
+  const violaEmpty = '&#9834;'.repeat(5 - c.violaScore);
+  const statsHtml = Object.entries(c.works)
+    .map(([k, v]) => `<span class="stat-chip"><strong>${v}</strong>${k}</span>`)
+    .join('');
+  const worksHtml = c.famous.map(w => {
+    const isQ = w.quartet;
+    const tagClass = isQ ? 'quartet' : '';
+    return `
+      <div class="work-item" onclick="playMusic('${w.q}')">
+        <div class="play-btn">&#9654;</div>
+        <span class="work-title">${w.t}</span>
+        <span class="work-genre-tag ${tagClass}">${w.g}</span>
+      </div>
+    `;
+  }).join('');
+
+  return `
+    <div class="composer-card" id="${c.id}" data-era="${c.era}">
+      <div class="composer-header" onclick="toggleCard('${c.id}')">
+        <div class="composer-info">
+          <h3 style="border-left:3px solid ${eraColor};padding-left:12px;">
+            ${c.name}
+            <span class="orig">${c.original}</span>
+          </h3>
+          <div class="composer-meta">
+            <span>${c.nation}</span>
+            <span>${c.birth}–${c.death}</span>
+            <span class="death-info">${c.deathAge}세 사망</span>
+            <span>${c.era}</span>
+          </div>
+        </div>
+        <div class="viola-badge" title="비올라 중요도 ${c.violaScore}/5">
+          <span style="opacity:1">${violaStars}</span><span style="opacity:0.2">${violaEmpty}</span>
+        </div>
+      </div>
+      <div class="composer-body" id="body-${c.id}">
+        ${c.style ? `<div class="basics-analogy" style="margin-bottom:16px;border-left-color:${eraColor};"><strong>작곡 스타일:</strong> ${c.style}</div>` : ''}
+        ${c.personality ? `<div class="basics-analogy" style="margin-bottom:16px;border-left-color:var(--viola);background:rgba(139,92,246,0.05);"><strong>성격 & 요즘 살았다면?</strong> ${c.personality}</div>` : ''}
+        <div class="work-stats">${statsHtml}</div>
+        <div class="famous-works">
+          <h4>주요 작품 (클릭하면 YouTube에서 들을 수 있어요)</h4>
+          ${worksHtml}
+        </div>
+        <div class="viola-note"><strong>비올라 포인트:</strong> ${c.violaNote}</div>
+        <div class="death-story"><strong>생애의 끝:</strong> ${c.deathStory}</div>
+      </div>
+    </div>
+  `;
+}
+
+function renderFilters() {
+  const bar = document.getElementById('filterBar');
+  const eras = ["전체", "바로크", "고전주의", "낭만주의", "후기낭만", "인상주의", "현대"];
+  bar.innerHTML = eras.map(e =>
+    `<button class="filter-btn ${e === '전체' ? 'active' : ''}" onclick="filterByEra('${e}')">${e}</button>`
+  ).join('') +
+    `<button class="filter-btn viola-filter" onclick="filterViola()">비올라 중요 작곡가</button>`;
+}
+
+function renderQuartetEssentials() {
+  const list = document.getElementById('quartetList');
+  list.innerHTML = QUARTET_ESSENTIALS.map(q => `
+    <div class="quartet-item" onclick="playMusic('${q.q}')">
+      <div class="q-composer">${q.composer}</div>
+      <div class="q-title">${q.title}</div>
+      <div class="q-desc">${q.desc}</div>
+    </div>
+  `).join('');
+}
+
+// ===================================================================
+// INTERACTIVITY
+// ===================================================================
+
+function playMusic(query) {
+  window.open('https://www.youtube.com/results?search_query=' + encodeURIComponent(query + ' full performance'), '_blank');
+}
+
+function toggleCard(id) {
+  const body = document.getElementById('body-' + id);
+  body.classList.toggle('open');
+}
+
+function scrollToComposer(id) {
+  const el = document.getElementById(id);
+  if (el) {
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    const body = document.getElementById('body-' + id);
+    if (!body.classList.contains('open')) body.classList.add('open');
+    el.style.borderColor = 'var(--gold)';
+    setTimeout(() => el.style.borderColor = '', 2000);
+  }
+}
+
+function filterByEra(era) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+
+  document.querySelectorAll('.era-section').forEach(s => {
+    if (era === '전체' || s.dataset.era === era) {
+      s.style.display = '';
+    } else {
+      s.style.display = 'none';
+    }
+  });
+}
+
+function filterViola() {
+  const btn = document.querySelector('.viola-filter');
+  btn.classList.toggle('active');
+  const active = btn.classList.contains('active');
+
+  document.querySelectorAll('.filter-btn:not(.viola-filter)').forEach(b => b.classList.remove('active'));
+  if (!active) {
+    document.querySelector('.filter-btn').classList.add('active');
+  }
+
+  document.querySelectorAll('.composer-card').forEach(card => {
+    if (active) {
+      const c = COMPOSERS.find(comp => comp.id === card.id);
+      card.style.display = (c && c.violaScore >= 4) ? '' : 'none';
+    } else {
+      card.style.display = '';
+    }
+  });
+  document.querySelectorAll('.era-section').forEach(s => s.style.display = '');
+}
+
+function getEraColor(era) {
+  const map = {
+    "바로크": "var(--era-baroque)",
+    "고전주의": "var(--era-classical)",
+    "낭만주의": "var(--era-romantic)",
+    "후기낭만": "var(--era-late)",
+    "인상주의": "var(--era-late)",
+    "현대": "var(--era-modern)",
+  };
+  return map[era] || "var(--text3)";
+}
+
+// Scroll animations
+function initScrollAnimations() {
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+}
+
+// Active nav
+function initActiveNav() {
+  const sections = document.querySelectorAll('section');
+  const navLinks = document.querySelectorAll('nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 200) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.classList.toggle('active', a.getAttribute('href') === '#' + current);
+    });
+  });
+}
+
+// ===================================================================
+// INIT
+// ===================================================================
+document.addEventListener('DOMContentLoaded', () => {
+  renderBasics();
+  renderGenreGuide();
+  renderChamberTree();
+  renderEraTimeline();
+  renderDeathChart();
+  renderLifespanTimeline();
+  renderFilters();
+  renderComposerSections();
+  renderQuartetEssentials();
+  initScrollAnimations();
+  initActiveNav();
+});
+</script>
+</body>
+</html>
