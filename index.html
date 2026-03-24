@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>클래식 음악 가이드 - 비올라 연주자를 위한 길잡이</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
 *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
 
@@ -29,7 +29,7 @@
 
 html { scroll-behavior: smooth; }
 body {
-  font-family: 'Noto Serif KR', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   background: var(--bg);
   color: var(--text);
   line-height: 1.8;
@@ -62,7 +62,7 @@ nav a:hover, nav a.active {
 /* ===== COMMON ===== */
 .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
 section { padding: 80px 0; }
-h1 { font-family: 'Cormorant Garamond', serif; font-size: 3.2rem; font-weight: 700; color: var(--gold); }
+h1 { font-family: 'Noto Sans KR', sans-serif; font-size: 3.2rem; font-weight: 700; color: var(--gold); }
 h2 {
   font-size: 1.6rem; color: var(--gold); margin-bottom: 40px;
   display: flex; align-items: center; gap: 12px;
@@ -101,14 +101,14 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 }
 .genre-card .hanja {
   font-size: 2rem; color: var(--gold); margin-bottom: 4px;
-  font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .genre-card .meaning {
   font-size: 0.82rem; color: var(--gold-dim); margin-bottom: 12px;
   border-left: 2px solid var(--gold-dim); padding-left: 10px;
 }
 .genre-card .original {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   color: var(--text3); font-size: 0.85rem; font-style: italic;
 }
 .genre-card p { font-size: 0.92rem; color: var(--text2); margin-top: 8px; }
@@ -155,7 +155,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .era-block small { font-size: 0.72rem; opacity: 0.8; margin-top: 2px; }
 .era-block .char {
   font-size: 0.72rem; opacity: 0.7; margin-top: 1px;
-  font-family: 'Noto Serif KR', serif;
+  font-family: 'Noto Sans KR', sans-serif;
 }
 .era-labels {
   display: flex; min-width: 800px;
@@ -258,7 +258,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   font-size: 1.2rem; margin-bottom: 2px;
 }
 .composer-info h3 .orig {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Noto Sans KR', sans-serif;
   font-size: 0.9rem; color: var(--text3); font-weight: 400;
   margin-left: 8px; font-style: italic;
 }
@@ -363,7 +363,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   padding: 7px 18px; border-radius: 20px;
   background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08);
   color: var(--text2); font-size: 0.82rem; cursor: pointer;
-  font-family: 'Noto Serif KR', serif; transition: all 0.2s;
+  font-family: 'Noto Sans KR', sans-serif; transition: all 0.2s;
 }
 .filter-btn:hover, .filter-btn.active {
   background: rgba(212,168,67,0.1); border-color: var(--gold-dim);
@@ -423,7 +423,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
   display: flex; align-items: center; gap: 8px;
 }
 .basics-block h3 .hj {
-  font-size: 1.4rem; font-family: 'Cormorant Garamond', 'Noto Serif KR', serif;
+  font-size: 1.4rem; font-family: 'Noto Sans KR', sans-serif;
 }
 .basics-block .sub-explain {
   font-size: 0.85rem; color: var(--gold-dim); margin-bottom: 16px;
@@ -444,7 +444,7 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 .basics-table tr:hover td { background: rgba(255,255,255,0.015); }
 .basics-table td:first-child { color: var(--text); font-weight: 500; }
 .basics-table .ital {
-  font-family: 'Cormorant Garamond', serif; font-style: italic;
+  font-family: 'Noto Sans KR', sans-serif; font-style: italic;
   color: var(--text3); font-size: 0.85rem;
 }
 .basics-analogy {
@@ -749,7 +749,7 @@ const BASICS = {
 
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:28px;">
       <div style="background:rgba(196,56,78,0.08);border:1px solid rgba(196,56,78,0.2);border-radius:14px;padding:20px;">
-        <div style="font-size:1.6rem;color:var(--era-romantic);font-family:'Cormorant Garamond','Noto Serif KR',serif;">交響曲</div>
+        <div style="font-size:1.6rem;color:var(--era-romantic);font-family:'Noto Sans KR',sans-serif;">交響曲</div>
         <div style="font-size:0.82rem;color:var(--era-romantic);margin-bottom:8px;">交(사귈 교) + 響(울릴 향) + 曲(곡 곡)</div>
         <h4 style="color:var(--text);margin-bottom:6px;">교향곡 (Symphony)</h4>
         <p style="font-size:0.88rem;color:var(--text2);">
@@ -763,7 +763,7 @@ const BASICS = {
       </div>
 
       <div style="background:rgba(212,168,67,0.08);border:1px solid rgba(212,168,67,0.2);border-radius:14px;padding:20px;">
-        <div style="font-size:1.6rem;color:var(--gold);font-family:'Cormorant Garamond','Noto Serif KR',serif;">奏鳴曲</div>
+        <div style="font-size:1.6rem;color:var(--gold);font-family:'Noto Sans KR',sans-serif;">奏鳴曲</div>
         <div style="font-size:0.82rem;color:var(--gold-dim);margin-bottom:8px;">奏(아뢸 주) + 鳴(울 명) + 曲(곡 곡)</div>
         <h4 style="color:var(--text);margin-bottom:6px;">소나타 (Sonata)</h4>
         <p style="font-size:0.88rem;color:var(--text2);">
@@ -777,7 +777,7 @@ const BASICS = {
       </div>
 
       <div style="background:rgba(46,134,222,0.08);border:1px solid rgba(46,134,222,0.2);border-radius:14px;padding:20px;">
-        <div style="font-size:1.6rem;color:var(--era-modern);font-family:'Cormorant Garamond','Noto Serif KR',serif;">協奏曲</div>
+        <div style="font-size:1.6rem;color:var(--era-modern);font-family:'Noto Sans KR',sans-serif;">協奏曲</div>
         <div style="font-size:0.82rem;color:var(--era-modern);margin-bottom:8px;">協(합할 협) + 奏(아뢸 주) + 曲(곡 곡)</div>
         <h4 style="color:var(--text);margin-bottom:6px;">협주곡 (Concerto)</h4>
         <p style="font-size:0.88rem;color:var(--text2);">
