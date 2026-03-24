@@ -69,13 +69,32 @@ body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text
 }
 .pick-card:hover{border-color:rgba(74,122,86,0.3);box-shadow:0 3px 12px rgba(0,0,0,0.05);}
 .pick-card.checked{border-color:var(--green);background:#f8fbf8;}
-.pick-header{display:flex;align-items:flex-start;gap:12px;}
-.pick-check{
-  width:22px;height:22px;border-radius:6px;border:2px solid #ccc;
-  flex-shrink:0;cursor:pointer;display:flex;align-items:center;justify-content:center;
-  transition:all 0.2s;margin-top:2px;background:#fff;font-size:0.75rem;color:#fff;
+.pick-card.rejected{border-color:var(--pink);background:#fdf6f6;opacity:0.7;}
+.pick-card.rejected:hover{opacity:1;}
+.pick-header{display:flex;align-items:flex-start;gap:10px;}
+.pick-btns{display:flex;flex-direction:column;gap:4px;flex-shrink:0;margin-top:2px;}
+.pick-btn{
+  width:24px;height:24px;border-radius:6px;border:2px solid #ccc;
+  cursor:pointer;display:flex;align-items:center;justify-content:center;
+  transition:all 0.2s;background:#fff;font-size:0.72rem;color:#fff;
 }
-.pick-check.on{background:var(--green);border-color:var(--green);}
+.pick-btn.wish-on{background:var(--green);border-color:var(--green);}
+.pick-btn.rej-on{background:var(--pink);border-color:var(--pink);}
+.pick-btn.rej{border-color:#dcc;color:#dcc;font-size:0.65rem;}
+.pick-btn.rej:hover{border-color:var(--pink);color:var(--pink);}
+.reject-reason{
+  display:none;margin-top:10px;padding:10px 14px;
+  background:#fef0f0;border:1px solid rgba(184,80,96,0.2);border-radius:10px;
+}
+.reject-reason.show{display:block;}
+.reject-reason input{
+  width:100%;padding:6px 10px;border:1px solid #dcc;border-radius:8px;
+  font-family:inherit;font-size:0.82rem;background:#fff;color:var(--text);
+}
+.reject-reason input:focus{outline:none;border-color:var(--pink);}
+.reject-reason-display{
+  margin-top:6px;font-size:0.8rem;color:var(--pink);font-style:italic;
+}
 .pick-info{flex:1;cursor:pointer;}
 .pick-title{font-size:0.95rem;font-weight:600;color:var(--text);}
 .pick-composer{font-size:0.82rem;color:var(--green);margin-top:1px;}
@@ -109,6 +128,7 @@ footer a{color:var(--green);text-decoration:none;}
 <div class="top-bar">
   <a href="index.html">← 가이드로 돌아가기</a>
   <div class="wishcount" onclick="toggleWishlist()">하고 싶은 곡 <span id="wishNum">0</span>곡</div>
+  <div class="wishcount" onclick="toggleRejectPanel()" style="background:var(--pink);border-color:var(--pink);">탈락 <span id="rejNum">0</span>곡</div>
 </div>
 
 <div class="hero">
@@ -120,6 +140,10 @@ footer a{color:var(--green);text-decoration:none;}
   <div class="wishlist-panel" id="wishPanel">
     <h3>내가 하고 싶은 곡</h3>
     <div id="wishList"></div>
+  </div>
+  <div class="wishlist-panel" id="rejectPanel" style="border-color:var(--pink);">
+    <h3 style="color:var(--pink);">탈락한 곡 + 사유</h3>
+    <div id="rejectList"></div>
   </div>
   <div id="app"></div>
 </div>
@@ -328,46 +352,105 @@ const PICKS = [
   },
 ];
 
-// === WISHLIST (localStorage) ===
-function getWish() {
-  try { return JSON.parse(localStorage.getItem('viola-wish') || '[]'); } catch { return []; }
-}
-function saveWish(list) {
-  localStorage.setItem('viola-wish', JSON.stringify(list));
-  updateWishUI();
-}
+// === STORAGE ===
+function getStore(key) { try { return JSON.parse(localStorage.getItem(key) || '[]'); } catch { return []; } }
+function setStore(key, val) { localStorage.setItem(key, JSON.stringify(val)); }
+
+// === WISH ===
 function toggleWish(id, title) {
-  let w = getWish();
+  // 탈락 상태면 해제
+  let r = getStore('viola-rej');
+  r = r.filter(x => x.id !== id);
+  setStore('viola-rej', r);
+
+  let w = getStore('viola-wish');
   const idx = w.findIndex(x => x.id === id);
   if (idx >= 0) w.splice(idx, 1);
   else w.push({id, title});
-  saveWish(w);
+  setStore('viola-wish', w);
+  updateAllUI();
 }
-function updateWishUI() {
-  const w = getWish();
+function toggleWishlist() { document.getElementById('wishPanel').classList.toggle('show'); }
+
+// === REJECT ===
+function startReject(id, title) {
+  // 위시 상태면 해제
+  let w = getStore('viola-wish');
+  w = w.filter(x => x.id !== id);
+  setStore('viola-wish', w);
+
+  // 이미 탈락이면 해제
+  let r = getStore('viola-rej');
+  if (r.some(x => x.id === id)) {
+    r = r.filter(x => x.id !== id);
+    setStore('viola-rej', r);
+    updateAllUI();
+    return;
+  }
+  // 사유 입력창 열기
+  const el = document.getElementById('rejinput-' + id);
+  if (el) { el.classList.add('show'); el.querySelector('input').focus(); }
+}
+function confirmReject(id, title, reason) {
+  let r = getStore('viola-rej');
+  r = r.filter(x => x.id !== id);
+  r.push({id, title, reason: reason || '(사유 없음)'});
+  setStore('viola-rej', r);
+  const el = document.getElementById('rejinput-' + id);
+  if (el) { el.classList.remove('show'); el.querySelector('input').value = ''; }
+  updateAllUI();
+}
+function cancelReject(id) {
+  const el = document.getElementById('rejinput-' + id);
+  if (el) { el.classList.remove('show'); el.querySelector('input').value = ''; }
+}
+function removeReject(id) {
+  let r = getStore('viola-rej');
+  r = r.filter(x => x.id !== id);
+  setStore('viola-rej', r);
+  updateAllUI();
+}
+function toggleRejectPanel() { document.getElementById('rejectPanel').classList.toggle('show'); }
+
+// === UI UPDATE ===
+function updateAllUI() {
+  const w = getStore('viola-wish');
+  const r = getStore('viola-rej');
   document.getElementById('wishNum').textContent = w.length;
-  // update checkboxes
-  document.querySelectorAll('.pick-check').forEach(el => {
+  document.getElementById('rejNum').textContent = r.length;
+
+  // 카드 상태
+  document.querySelectorAll('.pick-btn.wish').forEach(el => {
     const on = w.some(x => x.id === el.dataset.id);
-    el.classList.toggle('on', on);
+    el.classList.toggle('wish-on', on);
     el.textContent = on ? '✓' : '';
     el.closest('.pick-card').classList.toggle('checked', on);
+    el.closest('.pick-card').classList.remove('rejected');
   });
-  // wishlist panel
-  const panel = document.getElementById('wishList');
-  if (w.length === 0) {
-    panel.innerHTML = '<div class="wish-empty">아직 체크한 곡이 없어요. 마음에 드는 곡의 체크박스를 눌러보세요!</div>';
-  } else {
-    panel.innerHTML = w.map(x => `
-      <div class="wish-item">
-        <span style="flex:1;">${x.title}</span>
-        <button class="wish-remove" onclick="event.stopPropagation();toggleWish('${x.id}','')">삭제</button>
-      </div>
-    `).join('');
-  }
-}
-function toggleWishlist() {
-  document.getElementById('wishPanel').classList.toggle('show');
+  document.querySelectorAll('.pick-btn.rej').forEach(el => {
+    const item = r.find(x => x.id === el.dataset.id);
+    const on = !!item;
+    el.classList.toggle('rej-on', on);
+    el.textContent = on ? '✕' : '✕';
+    const card = el.closest('.pick-card');
+    card.classList.toggle('rejected', on);
+    card.classList.remove('checked');
+    // 사유 표시
+    const disp = document.getElementById('rejdisplay-' + el.dataset.id);
+    if (disp) disp.innerHTML = on ? `<span style="color:var(--pink);">탈락 사유: ${item.reason}</span>` : '';
+  });
+
+  // 위시 패널
+  const wp = document.getElementById('wishList');
+  wp.innerHTML = w.length === 0
+    ? '<div class="wish-empty">아직 체크한 곡이 없어요. 마음에 드는 곡의 ✓ 버튼을 눌러보세요!</div>'
+    : w.map(x => `<div class="wish-item"><span style="flex:1;">${x.title}</span><button class="wish-remove" onclick="event.stopPropagation();toggleWish('${x.id}','')">삭제</button></div>`).join('');
+
+  // 탈락 패널
+  const rp = document.getElementById('rejectList');
+  rp.innerHTML = r.length === 0
+    ? '<div class="wish-empty">탈락한 곡이 없어요.</div>'
+    : r.map(x => `<div class="wish-item"><span style="flex:1;"><strong>${x.title}</strong><br><span style="font-size:0.82rem;color:var(--pink);">${x.reason}</span></span><button class="wish-remove" onclick="event.stopPropagation();removeReject('${x.id}')">복원</button></div>`).join('');
 }
 
 // === RENDER ===
@@ -378,10 +461,13 @@ function render() {
       <div class="cat-title"><span class="emoji">${cat.emoji}</span> ${cat.category}</div>
       <div class="cat-desc">${cat.desc}</div>
       ${cat.items.map(p => `
-        <div class="pick-card">
+        <div class="pick-card" id="card-${p.id}">
           <div class="pick-header">
-            <div class="pick-check" data-id="${p.id}" onclick="event.stopPropagation();toggleWish('${p.id}',\`${p.title}\`)"></div>
-            <div class="pick-info" onclick="this.parentElement.nextElementSibling.classList.toggle('open')">
+            <div class="pick-btns">
+              <div class="pick-btn wish" data-id="${p.id}" title="하고 싶은 곡" onclick="event.stopPropagation();toggleWish('${p.id}',\`${p.title}\`)"></div>
+              <div class="pick-btn rej" data-id="${p.id}" title="탈락" onclick="event.stopPropagation();startReject('${p.id}',\`${p.title}\`)">✕</div>
+            </div>
+            <div class="pick-info" onclick="this.closest('.pick-card').querySelector('.pick-body').classList.toggle('open')">
               <div class="pick-title">${p.title}</div>
               <div class="pick-composer">${p.composer}</div>
               <div class="pick-tags">
@@ -396,6 +482,15 @@ function render() {
               ▶ YouTube에서 듣기
             </button>
           </div>
+          <div class="reject-reason" id="rejinput-${p.id}">
+            <div style="font-size:0.82rem;color:var(--pink);margin-bottom:6px;font-weight:600;">탈락 사유를 적어주세요:</div>
+            <input type="text" placeholder="예: 너무 어려움, 비올라 파트가 별로..." onkeydown="if(event.key==='Enter'){confirmReject('${p.id}',\`${p.title}\`,this.value);}" />
+            <div style="display:flex;gap:6px;margin-top:8px;">
+              <button class="play-btn-sm" style="background:var(--pink);font-size:0.78rem;" onclick="event.stopPropagation();confirmReject('${p.id}',\`${p.title}\`,this.closest('.reject-reason').querySelector('input').value)">탈락 확정</button>
+              <button class="play-btn-sm" style="background:var(--text3);font-size:0.78rem;" onclick="event.stopPropagation();cancelReject('${p.id}')">취소</button>
+            </div>
+          </div>
+          <div class="reject-reason-display" id="rejdisplay-${p.id}"></div>
         </div>
       `).join('')}
     </div>
