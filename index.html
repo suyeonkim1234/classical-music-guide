@@ -138,30 +138,23 @@ h3 { font-size: 1.15rem; color: var(--text); margin-bottom: 8px; }
 
 /* ===== ERA TIMELINE ===== */
 .era-timeline {
-  position: relative; overflow-x: auto; padding: 20px 0;
+  padding: 20px 0;
 }
-.era-bar-container {
-  display: flex; min-width: 800px; height: 80px;
-  border-radius: 12px; overflow: hidden; position: relative;
+.era-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 12px;
 }
-.era-block {
-  display: flex; flex-direction: column;
-  justify-content: center; align-items: center;
-  padding: 8px 16px; color: #fff; cursor: pointer; text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-  transition: filter 0.3s; position: relative;
-  font-size: 0.9rem; font-weight: 600;
+.era-card {
+  border-radius: 12px; padding: 18px 16px;
+  color: #fff; cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.35);
 }
-.era-block:hover { filter: brightness(1.2); }
-.era-block small { font-size: 0.72rem; opacity: 0.8; margin-top: 2px; }
-.era-block .char {
-  font-size: 0.72rem; opacity: 0.7; margin-top: 1px;
-  font-family: 'Noto Sans KR', sans-serif;
-}
-.era-labels {
-  display: flex; min-width: 800px;
-  margin-top: 8px; font-size: 0.75rem; color: var(--text3);
-}
-.era-labels span { text-align: center; }
+.era-card:hover { transform: translateY(-3px); box-shadow: 0 4px 16px rgba(0,0,0,0.15); }
+.era-card .era-card-name { font-size: 1rem; font-weight: 700; }
+.era-card .era-card-years { font-size: 0.82rem; opacity: 0.9; margin-top: 4px; }
+.era-card .era-card-char { font-size: 0.82rem; opacity: 0.85; margin-top: 8px; line-height: 1.5; }
 
 /* ===== DEATH CHART ===== */
 .death-chart { margin-top: 20px; }
@@ -531,6 +524,7 @@ footer {
     <li><a href="#composers">작곡가별 상세</a></li>
     <li><a href="#quartets">현4 필수 레퍼토리</a></li>
     <li><a href="#ourpieces" style="color:var(--viola);font-weight:600;">우리 연습곡</a></li>
+    <li><a href="viola-picks.html" style="color:var(--green-bright,var(--gold-bright));font-weight:600;">추천곡</a></li>
   </ul>
 </nav>
 
@@ -1503,30 +1497,15 @@ function renderGenreGuide() {
 
 function renderEraTimeline() {
   const container = document.getElementById('eraTimeline');
-  const totalSpan = 400; // 1600-2000
-  const startYear = 1600;
-
-  const blocks = ERA_DEFS.map(e => {
-    const widthPct = ((e.end - e.start) / totalSpan) * 100;
-    return `<div class="era-block" style="width:${widthPct}%;background:${e.color};"
-      onclick="filterByEra('${e.name}')">
-      ${e.name}
-      <small>${e.start}–${e.end}</small>
-      <span class="char">${e.char}</span>
-    </div>`;
-  }).join('');
-
-  const years = [];
-  for (let y = 1600; y <= 2000; y += 50) years.push(y);
-  const labels = years.map(y => {
-    const pct = ((y - startYear) / totalSpan) * 100;
-    return `<span style="position:absolute;left:${pct}%;">${y}</span>`;
-  }).join('');
-
   container.innerHTML = `
-    <div class="era-bar-container">${blocks}</div>
-    <div style="position:relative;min-width:800px;height:20px;margin-top:8px;">
-      ${labels}
+    <div class="era-cards">
+      ${ERA_DEFS.map(e => `
+        <div class="era-card" style="background:${e.color};" onclick="filterByEra('${e.name}')">
+          <div class="era-card-name">${e.hanja} ${e.name}</div>
+          <div class="era-card-years">${e.start}년 – ${e.end}년 (${e.end - e.start}년간)</div>
+          <div class="era-card-char">${e.char}</div>
+        </div>
+      `).join('')}
     </div>
   `;
 }

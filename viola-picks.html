@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>비올라 추천곡 - 즐겁게 연주할 수 있는 곡들</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+:root{
+  --bg:#f5f0e6;--card:#fff;--text:#2c2416;--text2:#5a4d3e;--text3:#8a7d6e;
+  --green:#4a7a56;--green-dim:#3a6646;--green-light:#e8f0ea;
+  --warm:#c08040;--pink:#c05868;--blue:#3a7aaa;--purple:#7a5a90;
+}
+body{font-family:'Noto Sans KR',sans-serif;background:var(--bg);color:var(--text);line-height:1.8;min-height:100vh;}
+.container{max-width:900px;margin:0 auto;padding:0 20px;}
+
+/* NAV */
+.top-bar{
+  position:sticky;top:0;z-index:100;
+  background:rgba(245,240,230,0.95);backdrop-filter:blur(12px);
+  border-bottom:1px solid rgba(74,122,86,0.15);padding:12px 0;
+  text-align:center;
+}
+.top-bar a{
+  color:var(--green);text-decoration:none;font-size:0.85rem;font-weight:500;
+  padding:6px 16px;border-radius:20px;border:1px solid var(--green);
+  transition:all 0.2s;
+}
+.top-bar a:hover{background:var(--green);color:#fff;}
+
+/* HERO */
+.hero{text-align:center;padding:80px 20px 50px;}
+.hero h1{font-size:2.2rem;font-weight:700;color:var(--green);margin-bottom:12px;}
+.hero p{color:var(--text2);font-size:1rem;max-width:550px;margin:0 auto;}
+
+/* CATEGORY */
+.cat-section{margin-bottom:50px;}
+.cat-title{
+  font-size:1.2rem;font-weight:700;color:var(--text);
+  margin-bottom:20px;padding-bottom:10px;
+  border-bottom:2px solid var(--green);
+  display:flex;align-items:center;gap:10px;
+}
+.cat-title .emoji{font-size:1.4rem;}
+.cat-desc{font-size:0.88rem;color:var(--text2);margin:-12px 0 20px;padding-left:2px;}
+
+/* CARD */
+.pick-card{
+  background:var(--card);border-radius:14px;padding:22px;margin-bottom:14px;
+  border:1px solid rgba(0,0,0,0.06);transition:all 0.2s;cursor:pointer;
+}
+.pick-card:hover{border-color:var(--green);transform:translateY(-2px);box-shadow:0 4px 16px rgba(0,0,0,0.06);}
+.pick-top{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap;}
+.pick-title{font-size:1rem;font-weight:600;color:var(--text);}
+.pick-composer{font-size:0.85rem;color:var(--green);margin-top:2px;}
+.pick-tags{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px;}
+.tag{font-size:0.72rem;padding:3px 10px;border-radius:12px;font-weight:500;}
+.tag-diff{background:#e8f0ea;color:var(--green);}
+.tag-mood{background:#fdf0e0;color:var(--warm);}
+.tag-type{background:#e8f0f8;color:var(--blue);}
+.pick-body{display:none;margin-top:16px;padding-top:14px;border-top:1px solid rgba(0,0,0,0.06);}
+.pick-body.open{display:block;}
+.pick-desc{font-size:0.88rem;color:var(--text2);margin-bottom:12px;}
+.pick-why{
+  font-size:0.88rem;color:var(--text2);padding:12px 16px;
+  background:var(--green-light);border-left:3px solid var(--green);
+  border-radius:0 10px 10px 0;margin-bottom:12px;
+}
+.pick-why strong{color:var(--green);}
+.play-btn-sm{
+  display:inline-flex;align-items:center;gap:8px;padding:8px 16px;
+  background:var(--green);color:#fff;border-radius:20px;font-size:0.82rem;
+  text-decoration:none;transition:all 0.2s;border:none;cursor:pointer;font-family:inherit;
+}
+.play-btn-sm:hover{background:var(--green-dim);}
+
+footer{text-align:center;padding:40px 20px;color:var(--text3);font-size:0.8rem;border-top:1px solid rgba(0,0,0,0.06);}
+footer a{color:var(--green);text-decoration:none;}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <a href="index.html">← 클래식 음악 가이드로 돌아가기</a>
+</div>
+
+<div class="hero">
+  <h1>비올라로 즐겁게 연주할 곡들</h1>
+  <p>클래식이 어렵게 느껴질 필요 없어요! 비올라의 따뜻한 음색을 살려 즐겁게 연주할 수 있는 곡들을 모았습니다.</p>
+</div>
+
+<div class="container" id="app"></div>
+
+<footer>
+  <p>비올라 추천곡 가이드 &mdash; <a href="index.html">클래식 음악 가이드</a>의 일부</p>
+</footer>
+
+<script>
+const PICKS = [
+  {
+    category: "처음 시작하기 좋은 곡",
+    emoji: "🌱",
+    desc: "비올라를 막 시작했거나, 쉽고 예쁜 곡으로 성취감을 느끼고 싶을 때",
+    items: [
+      {
+        title: "바흐 — 미뉴에트 G장조 BWV Anh.114",
+        composer: "바흐 (원곡: 페촐트)",
+        tags: [{t:"입문",c:"diff"},{t:"밝고 우아",c:"mood"},{t:"독주/듀엣",c:"type"}],
+        desc: "피아노 배울 때 누구나 치는 그 곡! 비올라로 연주하면 원래 피아노보다 더 우아하게 들려요. 3박자 춤곡이라 리듬 연습에도 좋음.",
+        why: "첫 발표회 곡으로 딱! 누구나 아는 멜로디라 관객 반응도 좋고, 비올라 음색이 이 곡의 따뜻함을 잘 살려줌.",
+        yt: "Bach Minuet G major viola"
+      },
+      {
+        title: "파헬벨 — 캐논 D장조",
+        composer: "파헬벨 (Johann Pachelbel)",
+        tags: [{t:"입문",c:"diff"},{t:"평화로움",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "결혼식 단골 곡! 현악 4중주 편곡에서 비올라는 반복되는 베이스 라인 위에 중간 화성을 채워요. 같은 패턴이 반복돼서 외우기 쉬움.",
+        why: "세상에서 제일 유명한 클래식 중 하나. 연주하면 '아 이 곡!' 하고 모두가 알아봄. 비올라 파트가 쉬운 편이라 앙상블 입문에 최고.",
+        yt: "Pachelbel Canon D string quartet"
+      },
+      {
+        title: "엘가 — 사랑의 인사 (Salut d'Amour)",
+        composer: "에드워드 엘가",
+        tags: [{t:"입문~초급",c:"diff"},{t:"달콤한 사랑",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "엘가가 약혼녀에게 선물한 곡. 달콤하고 낭만적인 멜로디가 비올라의 따뜻한 음색과 환상 궁합!",
+        why: "짧고 예쁘고 감동적. 연주회에서 앙코르곡으로 완벽. '이 곡 뭐예요?' 질문 100% 받음.",
+        yt: "Elgar Salut d'Amour viola"
+      },
+      {
+        title: "슈베르트 — 자장가 (Wiegenlied)",
+        composer: "프란츠 슈베르트",
+        tags: [{t:"입문",c:"diff"},{t:"포근함",c:"mood"},{t:"독주",c:"type"}],
+        desc: "'잠이 들거라~' 그 자장가. 느리고 부드러워서 활 쓰기 연습에 최고. 비올라의 낮고 따뜻한 음색이 자장가에 딱.",
+        why: "아기 재우는 용도로도 실제 사용 가능(!). 소리가 예뻐서 연습이 즐거운 곡.",
+        yt: "Schubert Wiegenlied viola"
+      },
+    ]
+  },
+  {
+    category: "기분 좋아지는 곡",
+    emoji: "☀️",
+    desc: "연습이 즐거워지는, 밝고 에너지 넘치는 곡들",
+    items: [
+      {
+        title: "모차르트 — 아이네 클라이네 나흐트무지크 1악장",
+        composer: "모차르트",
+        tags: [{t:"초급",c:"diff"},{t:"밝고 경쾌",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "'따다다 딴~ 따다다 딴~' 클래식 모르는 사람도 아는 멜로디! 현악 합주의 정석. 비올라는 리듬의 심장 역할.",
+        why: "연주하면 기분이 좋아짐. 단원들과 호흡 맞추는 재미가 큰 곡. 콘서트 오프닝으로 관객 분위기 확 띄움.",
+        yt: "Mozart Eine Kleine Nachtmusik string quartet"
+      },
+      {
+        title: "비발디 — 사계 중 '봄' 1악장",
+        composer: "비발디",
+        tags: [{t:"초급~중급",c:"diff"},{t:"생기 넘침",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "새가 지저귀고 시냇물이 흐르는 봄! 비올라는 바이올린의 화려한 선율을 받쳐주면서 자연의 소리를 만듦.",
+        why: "세계에서 가장 유명한 클래식. 연주하면 '오 사계!' 하고 무조건 알아봄.",
+        yt: "Vivaldi Spring string quartet"
+      },
+      {
+        title: "브람스 — 헝가리 무곡 5번",
+        composer: "브람스",
+        tags: [{t:"초급~중급",c:"diff"},{t:"신나는 춤곡",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "집시 음악 느낌의 빠르고 신나는 곡! 갑자기 느려졌다 빨라지는 템포 변화가 짜릿. 비올라 파트도 꽤 재미있음.",
+        why: "관객이 박수를 안 칠 수 없는 곡. 연주하면서 몸이 절로 움직임.",
+        yt: "Brahms Hungarian Dance No.5 string quartet"
+      },
+      {
+        title: "몬티 — 차르다시 (Csárdás)",
+        composer: "비토리오 몬티",
+        tags: [{t:"중급",c:"diff"},{t:"격정적 춤곡",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "느린 도입부 → 폭발적으로 빠른 춤! 바이올린 곡이지만 비올라 편곡이 있고, 비올라의 어두운 음색이 도입부에서 더 극적.",
+        why: "연주 끝나면 박수 폭발 보장. 기교를 보여줄 수 있는 쇼피스(show piece)!",
+        yt: "Monti Csardas viola"
+      },
+    ]
+  },
+  {
+    category: "감성 충전 곡",
+    emoji: "🌙",
+    desc: "비올라의 따뜻하고 깊은 음색이 가장 빛나는, 마음이 물들어가는 곡들",
+    items: [
+      {
+        title: "마스네 — 타이스의 명상곡 (Méditation de Thaïs)",
+        composer: "쥘 마스네",
+        tags: [{t:"초급~중급",c:"diff"},{t:"몽환적 아름다움",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "오페라 '타이스'의 간주곡. 바이올린 독주가 유명하지만, 비올라로 연주하면 더 깊고 몽환적인 느낌이 남. 비올라 음색의 진가를 보여주는 곡.",
+        why: "비올라가 바이올린보다 더 예쁘게 들리는 드문 곡 중 하나! 관객이 눈 감고 듣는 순간이 옴.",
+        yt: "Massenet Meditation Thais viola"
+      },
+      {
+        title: "생상스 — 백조 (Le Cygne)",
+        composer: "카미유 생상스",
+        tags: [{t:"초급",c:"diff"},{t:"고요한 아름다움",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "'동물의 사육제' 중 가장 유명한 곡. 원래 첼로곡이지만 비올라 편곡이 아름다움. 호수 위를 미끄러지듯 헤엄치는 백조의 모습.",
+        why: "느리고 쉬운데 엄청 예쁨. 비올라 음색 자랑하기에 최고. 어떤 자리에서든 먹히는 만능곡.",
+        yt: "Saint-Saens The Swan viola"
+      },
+      {
+        title: "슈만 — 동화 그림 Op.113 (Märchenbilder)",
+        composer: "로베르트 슈만",
+        tags: [{t:"중급",c:"diff"},{t:"동화적 감성",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "슈만이 비올라+피아노를 위해 직접 쓴 4곡짜리 모음곡! '동화 속 그림'이라는 뜻. 비올라를 위한 몇 안 되는 낭만주의 걸작.",
+        why: "비올라를 위해 만들어진 곡이라 음역·음색이 완벽하게 맞음. 비올라 연주자의 자부심을 느끼게 해주는 곡!",
+        yt: "Schumann Marchenbilder viola piano"
+      },
+      {
+        title: "바흐 — 무반주 첼로 모음곡 1번 프렐류드 (비올라 편곡)",
+        composer: "바흐",
+        tags: [{t:"중급",c:"diff"},{t:"명상적",c:"mood"},{t:"독주",c:"type"}],
+        desc: "세계에서 가장 유명한 독주곡. 원래 첼로용이지만 비올라로도 많이 연주. 반주 없이 혼자 연주하는 깊은 몰입감.",
+        why: "혼자 연습하면서도 음악 속에 빠져드는 경험. '나도 바흐를 연주하는구나' 하는 뿌듯함!",
+        yt: "Bach Cello Suite No.1 Prelude viola"
+      },
+    ]
+  },
+  {
+    category: "친구들과 함께 하기 좋은 곡",
+    emoji: "🎶",
+    desc: "콰르텟이나 앙상블로 다 같이 즐길 수 있는 곡들",
+    items: [
+      {
+        title: "보케리니 — 미뉴에트",
+        composer: "루이지 보케리니",
+        tags: [{t:"입문~초급",c:"diff"},{t:"우아한 춤곡",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "현악 5중주 원곡에서 가장 유명한 악장. 우아하고 경쾌한 3박자. 광고·영화에 수없이 쓰인 멜로디!",
+        why: "연주 시작하면 '아 이 곡!' 모두가 웃음. 파트별 난이도가 비슷해서 단원 모두 즐거움.",
+        yt: "Boccherini Minuet string quartet"
+      },
+      {
+        title: "드보르자크 — 현악4중주 12번 '아메리카' 1악장",
+        composer: "드보르자크",
+        tags: [{t:"중급",c:"diff"},{t:"향수·따뜻함",c:"mood"},{t:"현악4중주",c:"type"}],
+        desc: "미국 시골에서 고향을 그리며 쓴 곡. 귀에 착 감기는 멜로디 보물상자. 비올라 파트에 아름다운 선율이 많음!",
+        why: "콰르텟 레퍼토리의 국민곡. 비올라가 주선율을 받는 구간이 있어서 보람 큼!",
+        yt: "Dvorak American Quartet movement 1"
+      },
+      {
+        title: "하이든 — 현악4중주 '세레나데' Op.3-5 2악장",
+        composer: "하이든 (원곡 논쟁 있음)",
+        tags: [{t:"초급",c:"diff"},{t:"세레나데 감성",c:"mood"},{t:"현악4중주",c:"type"}],
+        desc: "달빛 아래 연인에게 바치는 세레나데. 바이올린의 선율 아래 비올라가 피치카토(줄 퉁기기)로 리듬을 만듦. 심쿵!",
+        why: "비올라 파트가 쉽고 재미있음 (피치카토 위주). 곡 전체가 달달해서 연주하면 행복해짐.",
+        yt: "Haydn Serenade string quartet"
+      },
+      {
+        title: "피아졸라 — 리베르탱고 (Libertango)",
+        composer: "아스토르 피아졸라",
+        tags: [{t:"중급",c:"diff"},{t:"쿨한 탱고",c:"mood"},{t:"앙상블",c:"type"}],
+        desc: "'자유의 탱고'란 뜻. 전통 탱고를 벗어난 현대적이고 세련된 느낌. 현악 4중주 편곡이 아주 멋짐!",
+        why: "클래식 안 좋아하는 사람도 이 곡은 좋아함. 연주하면 무조건 멋있어 보임.",
+        yt: "Piazzolla Libertango string quartet"
+      },
+    ]
+  },
+  {
+    category: "도전해볼 만한 곡",
+    emoji: "🔥",
+    desc: "실력이 올라왔다면! 성취감이 큰 곡들",
+    items: [
+      {
+        title: "브람스 — 비올라 소나타 Op.120-1 1악장",
+        composer: "브람스",
+        tags: [{t:"중급~상급",c:"diff"},{t:"깊은 감성",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "'비올라의 성경'이라 불리는 곡. 브람스 말년의 깊은 성찰이 담김. 비올라를 위한 곡 중 최고봉.",
+        why: "이 곡을 연주할 수 있으면 비올라 연주자로서 한 단계 올라선 것! 인생곡이 될 수 있음.",
+        yt: "Brahms Viola Sonata Op.120 No.1"
+      },
+      {
+        title: "모차르트 — 신포니아 콘체르탄테 K.364",
+        composer: "모차르트",
+        tags: [{t:"상급",c:"diff"},{t:"화려한 협연",c:"mood"},{t:"비올라+바이올린+오케스트라",c:"type"}],
+        desc: "사실상 비올라 협주곡의 최고봉! 바이올린과 비올라가 동등한 독주자로 오케스트라와 대화. 모차르트 자신이 비올라를 연주한 곡.",
+        why: "비올라가 바이올린과 나란히 무대 중앙에 서는 곡. 비올라 연주자의 꿈의 곡!",
+        yt: "Mozart Sinfonia Concertante K.364 viola"
+      },
+      {
+        title: "힌데미트 — 백조를 구운 남자 (Der Schwanendreher)",
+        composer: "파울 힌데미트",
+        tags: [{t:"상급",c:"diff"},{t:"강렬·장인적",c:"mood"},{t:"비올라+오케스트라",c:"type"}],
+        desc: "비올라 거장 힌데미트가 직접 연주하기 위해 쓴 비올라 협주곡. 독일 민요를 소재로 한 3악장. 비올라만을 위해 태어난 곡!",
+        why: "비올라 연주자 사이에서 '이 곡 했어?' 하면 존경의 눈빛을 받는 곡. 도전할 가치 있는 산.",
+        yt: "Hindemith Der Schwanendreher viola"
+      },
+      {
+        title: "쇼스타코비치 — 비올라 소나타 Op.147",
+        composer: "쇼스타코비치",
+        tags: [{t:"상급",c:"diff"},{t:"심오·명상적",c:"mood"},{t:"비올라+피아노",c:"type"}],
+        desc: "쇼스타코비치 인생의 마지막 곡. 죽음 직전에 완성. 비올라 문헌(비올라를 위해 쓰인 곡 전체)의 최고 걸작 중 하나.",
+        why: "이 곡을 연주하면 인생이 달라진다는 비올라 연주자들의 증언. 음악이 끝난 뒤의 침묵이 가장 깊은 곡.",
+        yt: "Shostakovich Viola Sonata Op.147"
+      },
+    ]
+  },
+];
+
+function render() {
+  const app = document.getElementById('app');
+  app.innerHTML = PICKS.map(cat => `
+    <div class="cat-section">
+      <div class="cat-title"><span class="emoji">${cat.emoji}</span> ${cat.category}</div>
+      <div class="cat-desc">${cat.desc}</div>
+      ${cat.items.map((p, i) => `
+        <div class="pick-card" onclick="this.querySelector('.pick-body').classList.toggle('open')">
+          <div class="pick-top">
+            <div>
+              <div class="pick-title">${p.title}</div>
+              <div class="pick-composer">${p.composer}</div>
+            </div>
+            <div class="pick-tags">
+              ${p.tags.map(t => `<span class="tag tag-${t.c}">${t.t}</span>`).join('')}
+            </div>
+          </div>
+          <div class="pick-body">
+            <div class="pick-desc">${p.desc}</div>
+            <div class="pick-why"><strong>이 곡을 추천하는 이유:</strong> ${p.why}</div>
+            <button class="play-btn-sm" onclick="event.stopPropagation();window.open('https://www.youtube.com/results?search_query='+encodeURIComponent('${p.yt} full performance'),'_blank')">
+              ▶ YouTube에서 듣기
+            </button>
+          </div>
+        </div>
+      `).join('')}
+    </div>
+  `).join('');
+}
+document.addEventListener('DOMContentLoaded', render);
+</script>
+</body>
+</html>
